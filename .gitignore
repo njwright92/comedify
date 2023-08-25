@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 server.js
+train_model.py
 
 # testing
 /coverage

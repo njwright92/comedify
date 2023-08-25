@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect
 import Navbar from './components/navbar';
+import SpotifyWebApi from 'spotify-web-api-js';
+
+const spotifyWebApi = new SpotifyWebApi();
+
 
 const Comedians = () => {
     const [comedians, setComedians] = useState([]);
@@ -10,6 +14,27 @@ const Comedians = () => {
         setNewComedian({ ...newComedian, [name]: value });
     };
 
+    const authenticateWithSpotify = () => {
+        const redirectUri = 'https://open.spotify.com/';
+        const clientId = 'e2e258cfe8f34779964ef7a8e3ba2d33';
+        const scope = 'user-library-read';
+
+        window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token&show_dialog=true`;
+    };
+
+    const getComediansFromSpotify = () => {
+        if (spotifyWebApi.getAccessToken()) {
+            spotifyWebApi.searchArtists('comedian')
+                .then((response) => {
+                    // Process the response and set it to the state
+                    setComedians(response.artists.items.map(artist => ({ name: artist.name, podcasts: [], videos: [] })));
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const comedian = {
@@ -18,13 +43,27 @@ const Comedians = () => {
             videos: newComedian.videos.split(','),
         };
         setComedians([...comedians, comedian]);
-        setNewComedian({ name: '', podcasts: '', videos: '' }); // Reset the form
+        setNewComedian({ name: '', podcasts: '', videos: '' });
     };
+
+    useEffect(() => {
+        // This code will only run on the client side
+        const token = new URL(window.location.href).hash.split('&')[0].split('=')[1];
+        if (token) {
+            spotifyWebApi.setAccessToken(token);
+            getComediansFromSpotify();
+        }
+    }, []);
 
     return (
         <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
             <Navbar />
             <h1 className="text-4xl text-white text-center mb-10 glow">Comedians Library</h1>
+            <div className="flex justify-center mb-4">
+                <button onClick={authenticateWithSpotify} className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded glow">
+                    Connect to Spotify
+                </button>
+            </div>
             <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-rgb(var(--background-end-rgb)) p-8 shadow-md rounded-md text-white">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -43,7 +82,7 @@ const Comedians = () => {
                     <div className="mb-4">
                         <label
                             htmlFor="podcasts"
-                            className="block text-sm font-semibold mb-2">Podcasts (comma separated):
+                            className="block text-sm font-semibold mb-2">Podcasts:
                         </label>
                         <input
                             type="text"
@@ -56,7 +95,7 @@ const Comedians = () => {
                     <div className="mb-4">
                         <label
                             htmlFor="videos"
-                            className="block text-sm font-semibold mb-2">Videos (comma separated):
+                            className="block text-sm font-semibold mb-2">Videos:
                         </label>
                         <input
                             type="text"

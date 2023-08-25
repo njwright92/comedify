@@ -16,7 +16,7 @@ const Navbar = () => {
                         <a href="/signIn" className="glow px-3 py-2 rounded-md text-sm font-medium">SignIn</a>
                         <a href="/signUp" className="glow px-3 py-2 rounded-md text-sm font-medium">SignUp</a>
                         <a href="/ComicBot" className="glow px-3 py-2 rounded-md text-sm font-medium">ComicBot</a>
-                        <a href="/Comedians" className="glow px-3 py-2 rounded-md text-sm font-medium">Comedians</a>
+                        <a href="/jokes" className="glow px-3 py-2 rounded-md text-sm font-medium">Jokes</a>
                     </div>
                 </div>
             </div>

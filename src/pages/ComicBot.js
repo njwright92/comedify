@@ -8,7 +8,7 @@ const ComicBot = () => {
     const askComicbot = async (prompt) => {
         try {
             const res = await axios.post('http://localhost:3001/ask-comicbot/', { prompt });
-            return res.data; // Return the whole data object
+            return res.data;
         } catch (error) {
             console.error(error);
         }
@@ -25,12 +25,12 @@ const ComicBot = () => {
         setUserInput('');
 
         try {
-            const botResponses = await askComicbot(userInput); // Get the bot's response directly
+            const botResponses = await askComicbot(userInput); 
 
-            // If you want to use just the first response
+            
             const botResponse = botResponses[0].generated_text;
 
-            // Append the bot's response to the conversation
+            
             setConversation(prevConversation => [...prevConversation, { from: 'bot', text: botResponse }]);
         } catch (error) {
             console.error(error);
@@ -44,13 +44,14 @@ const ComicBot = () => {
             <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot</h1>
             <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md">
                 <div className="input-area flex flex-col items-center">
-                    <input
-                        type="text"
+                    <textarea
                         value={userInput}
                         onChange={handleInputChange}
-                        className="p-2 border border-black rounded text-black"
+                        className="p-2 border border-black rounded text-black resize-y"
                         placeholder="Write your bit..."
+                        rows="2"
                     />
+
                     <button
                         onClick={handleSend}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded mt-4 glow"
@@ -58,19 +59,18 @@ const ComicBot = () => {
                         Send
                     </button>
                 </div>
-                <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md">
+                <div className="w-full mx-auto conversation">
                     {conversation.map((message, index) => (
-                        <div
-                            key={index}
-                            className={message.from === 'bot' ? 'bot-message-container' : 'user-message-container'}>
-                            <p
-                                className={message.from === 'bot' ? 'bot-message' : 'user-message'}>
+                        <div key={index} className={message.from === 'bot' ? 'bot-message-container' : 'user-message-container'}>
+                            <span className="text-black m-2">{message.from === 'bot' ? 'ComicBot:..' : '...You'}
+                            </span>
+                            <p className={message.from === 'bot' ? 'bot-message' : 'user-message'}>
                                 {message.text}
                             </p>
-                            {message.from === 'bot' && <span className="text-black">Bot:..</span>}
                         </div>
                     ))}
                 </div>
+
             </div>
         </main >
     );
