@@ -6,6 +6,8 @@
 .pnp.js
 server.js
 train_model.py
+firebase.js
+firebase
 
 # testing
 /coverage
