@@ -1,8 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Comedify
+
+Comedify is a [Next.js](https://nextjs.org/) application equipped with a conversational AI chatbot named ComicBot and a jokes/bits library. The app is perfect for those in comedy who want to test out their bits or simply have a humorous conversation with a chatbot. This project is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and connected to a Firebase Firestore database.
+
+## Features
+
+- **ComicBot**: An AI conversational chatbot for humor and entertainment.
+- **Jokes & Bits Library**: A collection of jokes and comedic bits that you can add to or read from.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js
+- Firebase account
+
+### Installation
+
+1. Clone the repository
+    ```bash
+    git clone https://github.com/njwright92/comedify.git
+    ```
+2. Navigate to the project directory
+    ```bash
+    cd comedify
+    ```
+3. Install dependencies
+    ```bash
+    npm install
+    ```
+4. Set up your Firebase Firestore and add your Firebase config to `firebase.js`.
+
+### Running the App
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -10,29 +40,25 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+How to Use
+ComicBot: Navigate to the ComicBot section to start a conversation with the chatbot.
+Jokes & Bits: Go to the Jokes & Bits section to add or view jokes.
+API
+ComicBot communicates with a backend API hosted on Hugging Face.
+Jokes & Bits Library utilizes Firebase Firestore for storage.
+Technologies
+Next.js
+React
+Node.js
+Firebase Firestore
+Axios
+Express
+Deploy
+For deployment, you can use platforms like Vercel.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+For more details, check Next.js deployment documentation.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+bash
