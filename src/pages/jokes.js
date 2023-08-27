@@ -22,19 +22,20 @@ const Jokes = () => {
         >
             <Navbar />
             <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
-            <div className="max-w-md mx-auto p-8 shadow-md rounded-md text-white">
+            <div className="w-full mx-auto shadow-md rounded-md text-white">
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
+                    <div className="input-area flex flex-col items-center">
                         <label
                             htmlFor="joke"
                             className="block text-sm font-semibold mb-2">Write Your Joke/Bit:
                         </label>
                         <textarea
-                            id="joke"
                             value={newJoke}
                             onChange={handleInputChange}
-                            className="p-2 w-full border rounded text-black"
-                            rows="4" required />
+                            placeholder="Write your bit.."
+                            className=" rounded text-black"
+                            rows='4'
+                            required />
                     </div>
                     <div className="text-center">
                         <button

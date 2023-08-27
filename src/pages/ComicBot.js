@@ -51,7 +51,7 @@ const ComicBot = () => {
                         value={userInput}
                         onChange={handleInputChange}
                         className="p-2 border border-black rounded text-black resize-y"
-                        placeholder="Write your bit..."
+                        placeholder="ask me anything.."
                         rows="2"
                     />
 
