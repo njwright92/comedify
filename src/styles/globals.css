@@ -89,3 +89,65 @@ body {
   background-color: #666;
   flex-grow: 1;
 }
+
+/* existing styles */
+
+.comicBotCard {
+  padding: 1rem;
+  background-image: linear-gradient(to right, #FFEB3B, #F44336, #E91E63);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: slideInFromLeft 7s ease-out;
+}
+
+@media (min-width: 768px) {
+  .comicBotCard {
+    padding: 3rem;
+  }
+}
+
+.jokeLibraryCard {
+  margin-left: auto;
+  width: 66.666667%;
+  padding: 1rem;
+  background-image: linear-gradient(to left, #4CAF50, #2196F3, #3F51B5);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: slideInFromRight 6s ease-out;
+}
+
+@media (min-width: 768px) {
+  .jokeLibraryCard {
+    padding: 3rem;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

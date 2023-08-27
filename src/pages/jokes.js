@@ -11,15 +11,15 @@ const Jokes = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setJokes([...jokes, newJoke]);
+        setJokes([newJoke, ...jokes]); 
         setNewJoke('');
     };
 
     return (
-        <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
+        <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb))">
             <Navbar />
             <h1 className="text-4xl text-white text-center mb-10 glow">Jokes & Bits</h1>
-            <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-rgb(var(--background-end-rgb)) p-8 shadow-md rounded-md text-white">
+            <div className="max-w-md mx-auto p-8 shadow-md rounded-md text-white">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label
@@ -40,12 +40,11 @@ const Jokes = () => {
                         </button>
                     </div>
                 </form>
-                {/* Existing jokes list */}
-                <div className="jokes-list mt-8">
+                <div className="jokes-list mt-8  mx-auto">
                     {jokes.map((joke, index) => (
                         <div
                             key={index}
-                            className="joke-item mb-4">
+                            className="joke-item mb-4 bg-white text-black p-4 rounded shadow">
                             <p className="text-lg">{joke}</p>
                         </div>
                     ))}
