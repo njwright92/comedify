@@ -11,14 +11,17 @@ const Jokes = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setJokes([newJoke, ...jokes]); 
+        setJokes([newJoke, ...jokes]);
         setNewJoke('');
     };
 
     return (
-        <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb))">
+        <main
+            className="flex flex-col"
+            style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+        >
             <Navbar />
-            <h1 className="text-4xl text-white text-center mb-10 glow">Jokes & Bits</h1>
+            <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
             <div className="max-w-md mx-auto p-8 shadow-md rounded-md text-white">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">

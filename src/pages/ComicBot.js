@@ -25,12 +25,12 @@ const ComicBot = () => {
         setUserInput('');
 
         try {
-            const botResponses = await askComicbot(userInput); 
+            const botResponses = await askComicbot(userInput);
 
-            
+
             const botResponse = botResponses[0].generated_text;
 
-            
+
             setConversation(prevConversation => [...prevConversation, { from: 'bot', text: botResponse }]);
         } catch (error) {
             console.error(error);
@@ -39,9 +39,12 @@ const ComicBot = () => {
 
 
     return (
-        <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-4">
+        <main
+            className="flex flex-col"
+            style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+        >
             <Navbar />
-            <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot</h1>
+            <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
             <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md">
                 <div className="input-area flex flex-col items-center">
                     <textarea
