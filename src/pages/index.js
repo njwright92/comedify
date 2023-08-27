@@ -18,7 +18,7 @@ export default function Home() {
         <title>Comedify!</title>
       </Head>
       <Navbar />
-      <div className="text-2xl text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 inline-block p-2 shadow-lg mb-5 mt-5 mx-auto"
+      <div className="text-2xl text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
         style={{ borderRadius: '3em' }}>
         Sign up for full access to all this app's features!
       </div>

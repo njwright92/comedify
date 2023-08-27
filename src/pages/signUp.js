@@ -1,25 +1,51 @@
 import { auth, provider } from '../firebase/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import Navbar from "./components/navbar";
 
 const SignUp = () => {
+    const router = useRouter(); // Initialize useRouter hook
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                // Handle sign-up
+                alert('Successfully signed up with Google!'); // Pop-up message
+                router.push('/'); // Navigate to homepage
             })
             .catch((error) => {
-                console.log(error.message);
+                alert(`Sign-up failed: ${error.message}`); // Pop-up message
+            });
+    };
+
+    const handleEmailPasswordSignUp = (e) => {
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const confirmPassword = e.target.confirmPassword.value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.'); // Pop-up message
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert('Successfully signed up!'); // Pop-up message
+                router.push('/'); // Navigate to homepage
+            })
+            .catch((error) => {
+                alert(`Sign-up failed: ${error.message}`); // Pop-up message
             });
     };
 
     return (
         <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
             <Navbar />
-            <h1 className="text-4xl text-white text-center mb-10 glow">Sign Up Page</h1>
+            <h1 className="text-4xl text-white text-center mb-10 glow">Sign Up</h1>
             <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-rgb(var(--background-end-rgb)) p-8 shadow-md rounded-md text-white">
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleEmailPasswordSignUp(e);
+                }}>
                     <div className="mb-4">
                         <label
                             htmlFor="email"

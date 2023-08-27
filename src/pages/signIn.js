@@ -1,27 +1,47 @@
-
+import { useRouter } from 'next/router'; // Import useRouter
 import { auth, provider } from '../firebase/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import Navbar from "./components/navbar";
 
 const SignIn = () => {
+    const router = useRouter(); // Initialize useRouter
 
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-
+                alert('Successfully signed in with Google!');
+                router.push('/'); // Redirect to homepage
             })
             .catch((error) => {
-                console.log(error.message);
+                alert(`Sign-in failed: ${error.message}`);
             });
     };
 
+    const handleEmailPasswordSignIn = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                alert('Successfully signed in!');
+                router.push('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                alert(`Sign-in failed: ${error.message}`);
+            });
+    };
+    
     return (
         <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
             <Navbar />
-            <h1 className="text-4xl text-white text-center mb-10 glow">Sign In </h1>
+            <h1 className="text-4xl text-white text-center mb-10 glow">Sign In</h1>
             <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-rgb(var(--background-end-rgb)) p-8 shadow-md rounded-md text-white">
 
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleEmailPasswordSignIn(e);
+                }}>
                     <div className="mb-4">
                         <label
                             htmlFor="email"
