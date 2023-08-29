@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase/firebase';
-import { doc, query, where, getDocs, updateDoc, collection, addDoc } from "firebase/firestore";
+import { doc, query, where, getDocs, updateDoc, collection, addDoc, deleteDoc } from "firebase/firestore";
 import Navbar from './components/navbar';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -19,13 +19,12 @@ const Jokes = () => {
         const fetchJokes = async () => {
             const jokeQuery = query(collection(db, "jokes"), where("uid", "==", userUID));
             const querySnapshot = await getDocs(jokeQuery);
-            const fetchedJokes = [];
-            querySnapshot.forEach((doc) => {
-                fetchedJokes.push(doc.data().joke);
-            });
+            const fetchedJokes = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                joke: doc.data().joke
+            }));
             setJokes(fetchedJokes);
         };
-
         if (userUID) {
             fetchJokes();
         }
@@ -41,8 +40,9 @@ const Jokes = () => {
                     joke: newJoke,
                     uid: userUID
                 });
+                const newDocId = docRef.id;
                 console.log("Document written with ID: ", docRef.id);
-                setJokes([newJoke, ...jokes]);
+                setJokes([{ id: newDocId, joke: newJoke }, ...jokes]);
                 setNewJoke('');
             } catch (error) {
                 console.error("Error adding joke: ", error);
@@ -50,6 +50,9 @@ const Jokes = () => {
         }
     };
 
+    const handleCancelEdit = () => {
+        setEditingIndex(null);
+    };
 
     const handleEditClick = (index) => {
         setEditingIndex(index);
@@ -57,16 +60,16 @@ const Jokes = () => {
 
     const handleEditChange = (e, index) => {
         const newJokes = [...jokes];
-        newJokes[index] = e.target.value;
+        newJokes[index].joke = e.target.value;
         setJokes(newJokes);
     };
 
     const handleEditSubmit = async (index) => {
         const editedJoke = jokes[index];
         try {
-            const jokeDoc = doc(db, "jokes", userUID);
+            const jokeDoc = doc(db, "jokes", editedJoke.id); // Using the document ID of the edited joke
             await updateDoc(jokeDoc, {
-                joke: editedJoke,
+                joke: editedJoke.joke,
                 uid: userUID
             });
             console.log("Document updated with userUID: ", userUID);
@@ -75,6 +78,20 @@ const Jokes = () => {
             console.error("Error updating joke: ", error);
         }
     };
+
+
+    const handleDelete = async (index) => {
+        try {
+            const jokeDoc = doc(db, "jokes", jokes[index].id); // Use the stored document ID here
+            await deleteDoc(jokeDoc);
+            const newJokes = [...jokes];
+            newJokes.splice(index, 1);
+            setJokes(newJokes);
+        } catch (error) {
+            console.error("Error deleting joke: ", error);
+        }
+    };
+
 
     return (
         <main
@@ -91,6 +108,7 @@ const Jokes = () => {
                             className="block text-sm font-semibold mb-2">Write Your Joke/Bit:
                         </label>
                         <textarea
+                            type="text"
                             value={newJoke}
                             onChange={handleInputChange}
                             placeholder="Write your bit.."
@@ -109,27 +127,39 @@ const Jokes = () => {
                     {jokes.map((joke, index) => (
                         <div
                             key={index}
-                            className="joke-item mb-4 bg-white text-black p-4 rounded shadow flex justify-between items-center"
+                            className="joke-item w-full input-area mb-4 bg-white text-black p-4 rounded shadow flex justify-between items-center"
                         >
                             {editingIndex === index ? (
                                 <>
-                                    <input
+                                    <textarea
                                         type="text"
-                                        value={joke}
+                                        value={joke.joke}
                                         onChange={(e) => handleEditChange(e, index)}
+                                        rows='4'
                                     />
-                                    <button onClick={() => handleEditSubmit(index)}>Save</button>
+                                    <div className="button-container flex space-x-2">
+                                        <button
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded"
+                                            onClick={() => handleEditSubmit(index)}>Save
+                                        </button>
+                                        <button
+                                            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded"
+                                            onClick={handleCancelEdit}>Cancel
+                                        </button>
+                                    </div>
+
                                 </>
                             ) : (
                                 <>
-                                    <p className="text-lg flex-grow">{joke}</p>
-                                    <i className="fa fa-lg mr-3 fa-pencil text-gray-500 hover:text-gray-800 cursor-pointer" aria-hidden="true" onClick={() => handleEditClick(index)}></i>
+                                    <p className="text-lg flex-grow">{joke.joke}</p>
+                                    <i className="fa fa-lg fa-pencil text-gray-500 hover:text-gray-800 cursor-pointer" aria-hidden="true" onClick={() => handleEditClick(index)}></i>
+                                    <i className="fa fa-lg fa-trash text-gray-500 hover:text-gray-800 cursor-pointer ml-3" aria-hidden="true" onClick={() => handleDelete(index, joke)}></i>
                                 </>
                             )}
+
                         </div>
                     ))}
                 </div>
-
             </div>
         </main>
     );
