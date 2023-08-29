@@ -95,7 +95,7 @@ const Jokes = () => {
 
     return (
         <main
-            className="flex flex-col"
+            className="flex flex-col p-3"
             style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
         >
             <Navbar />
