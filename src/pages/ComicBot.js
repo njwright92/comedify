@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/navbar';
 import axios from 'axios';
 import { db, auth } from '../firebase/firebase';
-import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, query, where, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 
 const ComicBot = () => {
@@ -30,10 +30,12 @@ const ComicBot = () => {
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const fetchedConversations = [];
                 querySnapshot.forEach((doc) => {
-                    fetchedConversations.push(doc.data().messages);
+                    // Include the document ID along with the messages
+                    fetchedConversations.push({ id: doc.id, messages: doc.data().messages });
                 });
                 console.log("Fetched Conversations:", fetchedConversations);
-                setAllConversations(prevConversations => [...prevConversations, ...fetchedConversations]);
+                // Updated to replace instead of merging with previous conversations
+                setAllConversations(fetchedConversations);
             }, (error) => {
                 console.error("Error retrieving conversations:", error);
             });
@@ -43,6 +45,7 @@ const ComicBot = () => {
             };
         }
     }, []);
+
 
 
     const saveConversation = async () => {
@@ -64,6 +67,15 @@ const ComicBot = () => {
         }
     };
 
+    const deleteConversation = async (docID) => {
+        try {
+            await deleteDoc(doc(db, "conversations", docID));
+            // Remove the conversation from the local state
+            setAllConversations(allConversations.filter(convo => convo.id !== docID));
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+        }
+    };
 
     const handleInputChange = (e) => {
         setUserInput(e.target.value);
@@ -135,15 +147,20 @@ const ComicBot = () => {
                     <h2 className="text-2xl text-black text-center mb-4">Previous Conversations</h2>
                     {allConversations.map((convo, index) => (
                         <div key={index} className={`${index % 2 === 0 ? "bg-gray-300" : "bg-white"} conversation-container`}>
-                            {convo.map((message, i) => (
+                            {convo.messages.map((message, i) => (
                                 <div key={i} className={message.from === 'bot' ? 'bot-message-container' : 'user-message-container'}>
-                                    <span className="text-black m-2">{message.from === 'bot' ? 'ComicBot:..' : '...You'}
-                                    </span>
+                                    <span className="text-black m-2">{message.from === 'bot' ? 'ComicBot:..' : '...You'}</span>
                                     <p className={message.from === 'bot' ? 'bot-message' : 'user-message'}>
                                         {message.text}
                                     </p>
                                 </div>
                             ))}
+                            <button
+                                className="bg-red-500 text-white px-2 py-1 rounded"
+                                onClick={() => deleteConversation(convo.id)}
+                            >
+                                Delete
+                            </button>
                         </div>
                     ))}
                 </div>
