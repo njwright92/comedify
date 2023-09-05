@@ -20,7 +20,15 @@ export default function Home() {
       <Navbar />
       <div className="text-2xl text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
         style={{ borderRadius: '3em' }}>
-        Sign up for full access to all this app's features!
+        Sign In or Sign Up for full access to all this app's features!
+      </div>
+      <div className="flex justify-center mt-4">
+        <a href="/signIn" className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200">
+          Sign In
+        </a>
+        <a href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
+          Sign Up
+        </a>
       </div>
 
       <h1 className="text-5xl text-white glow m-10 mx-auto">Comedify!</h1>

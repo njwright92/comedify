@@ -5,10 +5,10 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="bg-black text-white fixed top-0 right-0 mt-10"
+        <nav className="bg-black text-white fixed top-0 mt-10"
             style={{ borderRadius: '3em' }}
         >
-            <div className="flex justify-end">
+            <div className="flex justify-start">
                 <button onClick={() => setIsOpen(!isOpen)} className="md:hidden px-2 py-1 text-white">
                     <div className="w-6 flex flex-col justify-between m-5">
                         <div className="h-1.5 mt-1.5 bg-white"></div>
