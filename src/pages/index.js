@@ -50,15 +50,16 @@ export default function Home() {
             <p
               className="mr-4">Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It's like having a writing partner who's always in a funny mood. Sign up to get access!
             </p>
-            <Image
-              className="self-end mb-2"
-              src={comicBot}
-              alt="comicbot"
-              width='auto'
-              height='250'
-              priority
-            />
-
+            <a href="/ComicBot">
+              <Image
+                className="self-end mb-2"
+                src={comicBot}
+                alt="comicbot"
+                width='auto'
+                height='200'
+                priority
+              />
+            </a>
           </div>
         </div>
 
@@ -67,14 +68,16 @@ export default function Home() {
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"> JokePad
           </a>
           <div className="flex flex-row">
-            <Image
-              className="self-end mb-2"
-              src={jokes}
-              alt="Jokes"
-              width={250}
-              height='auto'
-              priority
-            />
+            <a href="/jokes">
+              <Image
+                className="self-end mb-2"
+                src={jokes}
+                alt="Jokes"
+                width='200'
+                height='auto'
+                priority
+              />
+            </a>
             <p
               className="ml-4">Write and store your comedy bits securely. An organized comedian is a successful comedian!
             </p>
