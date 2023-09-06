@@ -5,6 +5,7 @@ import comicLogo from '../Img/comicLogo.jpeg';
 import Navbar from './components/navbar';
 import comicBot from '../Img/comicBot.png'
 import jokes from '../Img/jokes.png'
+import Footer from './components/footer';
 
 export default function Home() {
 
@@ -84,7 +85,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      <Footer />
     </main >
   )
 }
