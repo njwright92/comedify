@@ -90,8 +90,6 @@ body {
   flex-grow: 1;
 }
 
-/* existing styles */
-
 .comicBotCard {
   padding: 1rem;
   background-image: linear-gradient(to right, #FFEB3B, #F44336, #E91E63);
@@ -100,13 +98,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  animation: slideInFromLeft 7s ease-out;
-}
-
-@media (min-width: 768px) {
-  .comicBotCard {
-    padding: 3rem;
-  }
 }
 
 .jokeLibraryCard {
@@ -119,37 +110,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  animation: slideInFromRight 6s ease-out;
-}
-
-@media (min-width: 768px) {
-  .jokeLibraryCard {
-    padding: 3rem;
-  }
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInFromRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 .conversation-container {
