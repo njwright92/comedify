@@ -1,4 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase/firebase';
+import { signOut } from 'firebase/auth';
 import Image from 'next/image'
 import Head from 'next/head'
 import comicLogo from '../Img/comicLogo.jpeg';
@@ -10,11 +13,51 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 export default function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 3000,
     });
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+
+    AOS.init({
+      duration: 3000,
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleRedirect = (link) => {
+    if (!isAuthenticated) {
+      alert("Please Sign In or Sign Up.");
+    } else {
+      window.location.href = link;
+    }
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        alert('Successfully signed out.');
+        // You can add code here to redirect the user or update state
+      })
+      .catch((error) => {
+        alert(`An error occurred: ${error.message}`);
+      });
+  };
+
 
   return (
     <main className="flex flex-col" style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}>
@@ -34,6 +77,10 @@ export default function Home() {
         <a href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
           Sign Up
         </a>
+        <button onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
+          Sign Out
+        </button>
+
       </div>
       <h1 className="text-5xl text-white glow m-10 mx-auto" data-aos="flip-up">
         Comedify!
@@ -49,7 +96,7 @@ export default function Home() {
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div className='comicBotCard text-black m-1 flex flex-col' data-aos="fade-left">
-          <a href="/ComicBot"
+          <a onClick={() => handleRedirect('/ComicBot')}
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             ComicBot
           </a>
@@ -70,7 +117,7 @@ export default function Home() {
           </div>
         </div>
         <div className='jokeLibraryCard text-black m-1 flex flex-col' data-aos="fade-right">
-          <a href="/jokes"
+          <a onClick={() => handleRedirect('/jokes')}
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             JokePad
           </a>
