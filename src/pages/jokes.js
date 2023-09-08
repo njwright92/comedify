@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase/firebase';
 import { doc, query, where, getDocs, updateDoc, collection, addDoc, deleteDoc } from "firebase/firestore";
+import { useRouter } from 'next/router';
 import Navbar from './components/navbar';
+import { signOut } from 'firebase/auth';
 import 'font-awesome/css/font-awesome.min.css';
 
 
 const Jokes = () => {
+    const router = useRouter();
     const [jokes, setJokes] = useState([]);
     const [newJoke, setNewJoke] = useState('');
     const [editingIndex, setEditingIndex] = useState(null);
@@ -92,6 +95,16 @@ const Jokes = () => {
         }
     };
 
+    const handleSignOut = () => {
+        signOut(auth)
+            .then(() => {
+                alert('Successfully signed out.');
+                router.push('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                alert(`An error occurred: ${error.message}`);
+            });
+    };
 
     return (
         <main
@@ -99,8 +112,12 @@ const Jokes = () => {
             style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
         >
             <Navbar />
+
             <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
             <div className="w-full mx-auto shadow-md rounded-md text-white">
+                <a onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
+                    Sign Out
+                </a>
                 <form onSubmit={handleSubmit}>
                     <div className="input-area flex flex-col items-center">
                         <label

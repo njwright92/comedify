@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Navbar from './components/navbar';
 import axios from 'axios';
 import { db, auth } from '../firebase/firebase';
 import { addDoc, collection, query, where, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import { signOut } from 'firebase/auth';
 
 
 const ComicBot = () => {
+    const router = useRouter();
     const [allConversations, setAllConversations] = useState([]);
     const [conversation, setConversation] = useState([]);
     const [userInput, setUserInput] = useState('');
@@ -99,6 +102,16 @@ const ComicBot = () => {
         }
     };
 
+    const handleSignOut = () => {
+        signOut(auth)
+            .then(() => {
+                alert('Successfully signed out.');
+                router.push('/'); // Redirect to homepage
+            })
+            .catch((error) => {
+                alert(`An error occurred: ${error.message}`);
+            });
+    };
 
     return (
         <main
@@ -106,8 +119,12 @@ const ComicBot = () => {
             style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
         >
             <Navbar />
+
             <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
             <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md">
+                <a onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
+                    Sign Out
+                </a>
                 <div className="input-area flex flex-col items-center">
                     <textarea
                         value={userInput}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
-import { signOut } from 'firebase/auth';
 import Image from 'next/image'
 import Head from 'next/head'
 import comicLogo from '../Img/comicLogo.jpeg';
@@ -47,18 +46,6 @@ export default function Home() {
     }
   };
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        alert('Successfully signed out.');
-        // You can add code here to redirect the user or update state
-      })
-      .catch((error) => {
-        alert(`An error occurred: ${error.message}`);
-      });
-  };
-
-
   return (
     <main className="flex flex-col" style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}>
       <Head>
@@ -77,10 +64,6 @@ export default function Home() {
         <a href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
           Sign Up
         </a>
-        <button onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
-          Sign Out
-        </button>
-
       </div>
       <h1 className="text-5xl text-white glow m-10 mx-auto" data-aos="flip-up">
         Comedify!
@@ -89,7 +72,7 @@ export default function Home() {
         className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] m-10 mx-auto"
         src={comicLogo}
         alt="Comic Logo"
-        width={280}
+        width={300}
         height='auto'
         priority
         data-aos="flip-up"
