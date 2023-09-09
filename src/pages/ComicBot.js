@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Navbar from './components/navbar';
 import axios from 'axios';
+import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '../firebase/firebase';
-import { addDoc, collection, query, where, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import { addDoc, collection, query, where, doc, deleteDoc, getDocs } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
 
 
@@ -13,6 +14,8 @@ const ComicBot = () => {
     const [conversation, setConversation] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [isSaved, setIsSaved] = useState(false);
+    const [userUID, setUserUID] = useState(auth.currentUser ? auth.currentUser.uid : null);
+
 
     const askComicbot = async (prompt) => {
         try {
@@ -24,30 +27,43 @@ const ComicBot = () => {
     };
 
     useEffect(() => {
-        const userUID = auth.currentUser ? auth.currentUser.uid : null;
-        console.log("User UID:", userUID); // Debugging line to ensure you have a UID
-
-        if (userUID) {
-            const q = query(collection(db, "conversations"), where("uid", "==", userUID));
-
-            const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                const fetchedConversations = [];
-                querySnapshot.forEach((doc) => {
-                    // Include the document ID along with the messages
-                    fetchedConversations.push({ id: doc.id, messages: doc.data().messages });
-                });
-                console.log("Fetched Conversations:", fetchedConversations);
-                // Updated to replace instead of merging with previous conversations
-                setAllConversations(fetchedConversations);
-            }, (error) => {
-                console.error("Error retrieving conversations:", error);
-            });
-
-            return () => {
-                unsubscribe();
-            };
-        }
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserUID(user.uid);
+            } else {
+                setUserUID(null);
+            }
+        });
+        return () => {
+            unsubscribe();
+        };
     }, []);
+
+    // Your rewritten useEffect for conversations
+    useEffect(() => {
+        const fetchConvos = async () => {
+            const convoQuery = query(collection(db, "conversations"), where("uid", "==", userUID));
+            const querySnapshot = await getDocs(convoQuery);
+
+            const fetchedConvos = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                messages: doc.data().messages
+            }));
+
+            // Similar to how you set jokes, you're setting all conversations here
+            setAllConversations(fetchedConvos);
+
+            // If you want to set the first conversation as the active one
+            if (fetchedConvos.length > 0) {
+                setConversation(fetchedConvos[0].messages);
+            }
+        };
+
+        // Only fetch if userUID exists
+        if (userUID) {
+            fetchConvos();
+        }
+    }, [userUID]);
 
 
 
@@ -106,7 +122,7 @@ const ComicBot = () => {
         signOut(auth)
             .then(() => {
                 alert('Successfully signed out.');
-                router.push('/'); // Redirect to homepage
+                router.push('/');
             })
             .catch((error) => {
                 alert(`An error occurred: ${error.message}`);
@@ -121,8 +137,9 @@ const ComicBot = () => {
             <Navbar />
 
             <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
-            <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md">
-                <a onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
+            <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md relative">
+                <a onClick={handleSignOut}
+                    className="glow px-2 py-1 rounded-md text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200 absolute top-4 right-4">
                     Sign Out
                 </a>
                 <div className="input-area flex flex-col items-center">

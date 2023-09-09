@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { doc, query, where, getDocs, updateDoc, collection, addDoc, deleteDoc } from "firebase/firestore";
 import { useRouter } from 'next/router';
 import Navbar from './components/navbar';
@@ -12,11 +13,24 @@ const Jokes = () => {
     const [jokes, setJokes] = useState([]);
     const [newJoke, setNewJoke] = useState('');
     const [editingIndex, setEditingIndex] = useState(null);
-    const userUID = auth.currentUser ? auth.currentUser.uid : null;
+    const [userUID, setUserUID] = useState(auth.currentUser ? auth.currentUser.uid : null);
 
     const handleInputChange = (e) => {
         setNewJoke(e.target.value);
     };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserUID(user.uid);
+            } else {
+                setUserUID(null);
+            }
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     useEffect(() => {
         const fetchJokes = async () => {
@@ -70,7 +84,7 @@ const Jokes = () => {
     const handleEditSubmit = async (index) => {
         const editedJoke = jokes[index];
         try {
-            const jokeDoc = doc(db, "jokes", editedJoke.id); // Using the document ID of the edited joke
+            const jokeDoc = doc(db, "jokes", editedJoke.id);
             await updateDoc(jokeDoc, {
                 joke: editedJoke.joke,
                 uid: userUID
@@ -85,7 +99,7 @@ const Jokes = () => {
 
     const handleDelete = async (index) => {
         try {
-            const jokeDoc = doc(db, "jokes", jokes[index].id); // Use the stored document ID here
+            const jokeDoc = doc(db, "jokes", jokes[index].id);
             await deleteDoc(jokeDoc);
             const newJokes = [...jokes];
             newJokes.splice(index, 1);
@@ -99,7 +113,7 @@ const Jokes = () => {
         signOut(auth)
             .then(() => {
                 alert('Successfully signed out.');
-                router.push('/'); // Redirect to homepage
+                router.push('/');
             })
             .catch((error) => {
                 alert(`An error occurred: ${error.message}`);
@@ -114,8 +128,8 @@ const Jokes = () => {
             <Navbar />
 
             <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
-            <div className="w-full mx-auto shadow-md rounded-md text-white">
-                <a onClick={handleSignOut} className="glow px-6 py-3 rounded-md text-lg font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200">
+            <div className="w-full mx-auto shadow-md rounded-md text-white relative">
+                <a onClick={handleSignOut} className="glow px-2 py-1 rounded-md text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200 absolute top-4 right-4">
                     Sign Out
                 </a>
                 <form onSubmit={handleSubmit}>
