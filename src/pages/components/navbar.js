@@ -34,14 +34,23 @@ const Navbar = () => {
         >
             <div className="flex justify-start">
                 <button onClick={() => setIsOpen(!isOpen)} className="md:hidden px-2 py-1 text-white">
-                    {/* ... existing code ... */}
                 </button>
                 <div className={`${isOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4`}>
-                    <a href="/" className="glow px-3 py-2 rounded-md text-lg font-medium">Home</a>
-                    <a href="/signIn" className="glow px-3 py-2 rounded-md text-lg font-medium">SignIn</a>
-                    <a href="/signUp" className="glow px-3 py-2 rounded-md text-lg font-medium">SignUp</a>
-                    <a onClick={() => handleRedirect('/ComicBot')} className="glow px-3 py-2 rounded-md text-lg font-medium">ComicBot</a>
-                    <a onClick={() => handleRedirect('/jokes')} className="glow px-3 py-2 rounded-md text-lg font-medium">JokePad</a>
+                    <button
+                        href="/"
+                        className="glow px-3 py-2 rounded-md text-lg font-medium">Home</button>
+                    <button
+                        href="/signIn"
+                        className="glow px-3 py-2 rounded-md text-lg font-medium">SignIn</button>
+                    <button
+                        href="/signUp"
+                        className="glow px-3 py-2 rounded-md text-lg font-medium">SignUp</button>
+                    <button
+                        onClick={() => handleRedirect('/ComicBot')}
+                        className="glow px-3 py-2 rounded-md text-lg font-medium">ComicBot</button>
+                    <button
+                        onClick={() => handleRedirect('/jokes')}
+                        className="glow px-3 py-2 rounded-md text-lg font-medium">JokePad</button>
                 </div>
             </div>
         </nav>

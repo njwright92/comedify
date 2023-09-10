@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     AOS.init({
-      duration: 3000,
+      duration: 2000,
     });
   }, []);
 
@@ -30,7 +30,7 @@ export default function Home() {
     });
 
     AOS.init({
-      duration: 3000,
+      duration: 2000,
     });
 
     return () => {
@@ -58,12 +58,12 @@ export default function Home() {
         Sign In or Sign Up for full access to all this app's features!
       </div>
       <div className="flex justify-center mt-4">
-        <a href="/signIn" className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200">
+        <button href="/signIn" className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200">
           Sign In
-        </a>
-        <a href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
+        </button>
+        <button href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
           Sign Up
-        </a>
+        </button>
       </div>
       <h1 className="text-5xl text-white glow m-10 mx-auto" data-aos="flip-up">
         Comedify!
@@ -79,42 +79,42 @@ export default function Home() {
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div className='comicBotCard text-black m-1 flex flex-col' data-aos="fade-left">
-          <a onClick={() => handleRedirect('/ComicBot')}
+          <button onClick={() => handleRedirect('/ComicBot')}
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             ComicBot
-          </a>
+          </button>
           <div className="flex flex-row">
             <p className="mr-4">
               Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It's like having a writing partner who's always in a funny mood. Sign up to get access!
             </p>
-            <a href="/ComicBot">
+            <button href="/ComicBot">
               <Image
                 className="self-end mb-2"
                 src={comicBot}
                 alt="comicbot"
                 width='auto'
-                height='200'
+                height='300'
                 priority
               />
-            </a>
+            </button>
           </div>
         </div>
         <div className='jokeLibraryCard text-black m-1 flex flex-col' data-aos="fade-right">
-          <a onClick={() => handleRedirect('/jokes')}
+          <button onClick={() => handleRedirect('/jokes')}
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             JokePad
-          </a>
+          </button>
           <div className="flex flex-row">
-            <a href="/jokes">
+            <button href="/jokes">
               <Image
                 className="self-end mb-2"
                 src={jokes}
                 alt="Jokes"
-                width='200'
+                width='300'
                 height='auto'
                 priority
               />
-            </a>
+            </button>
             <p className="ml-4">
               Write and store your comedy bits securely. An organized comedian is a successful comedian!
             </p>
