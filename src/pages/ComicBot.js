@@ -52,14 +52,8 @@ const ComicBot = () => {
 
             // Similar to how you set jokes, you're setting all conversations here
             setAllConversations(fetchedConvos);
-
-            // If you want to set the first conversation as the active one
-            if (fetchedConvos.length > 0) {
-                setConversation(fetchedConvos[0].messages);
-            }
         };
 
-        // Only fetch if userUID exists
         if (userUID) {
             fetchConvos();
         }
@@ -84,6 +78,7 @@ const ComicBot = () => {
                 console.error("Error saving conversation: ", error);
             }
         }
+        setConversation([]);
     };
 
     const deleteConversation = async (docID) => {
