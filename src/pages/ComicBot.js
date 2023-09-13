@@ -39,7 +39,7 @@ const ComicBot = () => {
         };
     }, []);
 
-    // Your rewritten useEffect for conversations
+    
     useEffect(() => {
         const fetchConvos = async () => {
             const convoQuery = query(collection(db, "conversations"), where("uid", "==", userUID));
@@ -50,7 +50,7 @@ const ComicBot = () => {
                 messages: doc.data().messages
             }));
 
-            // Similar to how you set jokes, you're setting all conversations here
+            
             setAllConversations(fetchedConvos);
         };
 
@@ -84,7 +84,7 @@ const ComicBot = () => {
     const deleteConversation = async (docID) => {
         try {
             await deleteDoc(doc(db, "conversations", docID));
-            // Remove the conversation from the local state
+            
             setAllConversations(allConversations.filter(convo => convo.id !== docID));
         } catch (error) {
             console.error("Error deleting document: ", error);
