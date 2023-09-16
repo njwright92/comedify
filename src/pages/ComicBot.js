@@ -59,8 +59,7 @@ const ComicBot = () => {
         }
     }, [userUID]);
 
-
-
+    
     const saveConversation = async () => {
         const userUID = auth.currentUser ? auth.currentUser.uid : null;
         console.log("Saving conversation for UID:", userUID);
@@ -130,7 +129,6 @@ const ComicBot = () => {
             style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
         >
             <Navbar />
-
             <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
             <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md relative">
                 <a onClick={handleSignOut}
@@ -145,7 +143,6 @@ const ComicBot = () => {
                         placeholder="ask me anything.."
                         rows="2"
                     />
-
                     <button
                         onClick={handleSend}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded mt-4 glow"
