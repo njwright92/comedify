@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Navbar from './components/navbar';
+import Navbar from '../components/navbar';
 import axios from 'axios';
 import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '../firebase/firebase';
 import { addDoc, collection, query, where, doc, deleteDoc, getDocs } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
+import Footer from '@/components/footer';
 
 
 const ComicBot = () => {
@@ -130,7 +131,7 @@ const ComicBot = () => {
         >
             <Navbar />
             <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
-            <div className="w-full mx-auto bg-white p-8 shadow-md rounded-md relative">
+            <div className="w-full mx-auto m-2 mt-5 bg-white p-8 shadow-md rounded-md relative">
                 <a onClick={handleSignOut}
                     className="glow px-2 py-1 rounded-md text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200 absolute top-4 right-4">
                     Sign Out
@@ -191,6 +192,7 @@ const ComicBot = () => {
                     ))}
                 </div>
             </div>
+            <Footer />
         </main >
     );
 };

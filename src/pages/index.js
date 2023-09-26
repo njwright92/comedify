@@ -4,10 +4,10 @@ import { auth } from '../firebase/firebase';
 import Image from 'next/image'
 import Head from 'next/head'
 import comicLogo from '../Img/comicLogo.jpeg';
-import Navbar from './components/navbar';
+import Navbar from '../components/navbar';
 import comicBot from '../Img/comicBot.png'
 import jokes from '../Img/jokes.png'
-import Footer from './components/footer';
+import Footer from '../components/footer'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -89,7 +89,7 @@ export default function Home() {
         className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] m-10 mx-auto"
         src={comicLogo}
         alt="Comic Logo"
-        width={300}
+        width={350}
         height='auto'
         priority
         data-aos="flip-up"

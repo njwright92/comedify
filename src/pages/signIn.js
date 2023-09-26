@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'; // Import useRouter
 import { auth, provider } from '../firebase/firebase';
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import Navbar from "./components/navbar";
+import Navbar from "../components/navbar";
 
 const SignIn = () => {
     const router = useRouter(); // Initialize useRouter

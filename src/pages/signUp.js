@@ -1,7 +1,7 @@
 import { auth, provider } from '../firebase/firebase';
 import { useRouter } from 'next/router';
 import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
-import Navbar from "./components/navbar";
+import Navbar from "../components/navbar";
 
 const SignUp = () => {
     const router = useRouter(); // Initialize useRouter hook

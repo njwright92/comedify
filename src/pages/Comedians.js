@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; // Added useEffect
-import Navbar from './components/navbar';
+import Navbar from '../components/navbar';
 import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyWebApi = new SpotifyWebApi();

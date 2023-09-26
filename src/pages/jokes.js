@@ -3,9 +3,10 @@ import { db, auth } from '../firebase/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, query, where, getDocs, updateDoc, collection, addDoc, deleteDoc } from "firebase/firestore";
 import { useRouter } from 'next/router';
-import Navbar from './components/navbar';
+import Navbar from '../components/navbar';
 import { signOut } from 'firebase/auth';
 import 'font-awesome/css/font-awesome.min.css';
+import Footer from '@/components/footer';
 
 
 const Jokes = () => {
@@ -133,7 +134,7 @@ const Jokes = () => {
                     Sign Out
                 </a>
                 <form onSubmit={handleSubmit}>
-                    <div className="input-area flex flex-col items-center">
+                    <div className="input-area mt-5 flex flex-col items-center">
                         <label
                             htmlFor="joke"
                             className="block text-sm font-semibold mb-2">Write Your Joke/Bit:
@@ -192,6 +193,7 @@ const Jokes = () => {
                     ))}
                 </div>
             </div>
+            <Footer />
         </main>
     );
 };

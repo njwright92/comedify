@@ -33,17 +33,12 @@ const Navbar = () => {
             <div className="flex justify-between items-center glow">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="text-4xl py-8 text-white glow"
+                    className=" glow text-5xl ml-3 py-6 text-white lg:hidden"
                 >
                     ≡
                 </button>
-                <div
-                    className={`${isOpen ? 'block' : 'hidden'
-                        } md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4`}
-                >
 
-                </div>
-                <div className={`${isOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4`}>
+                <div className={`${isOpen ? 'block' : 'hidden'} lg:flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4`}>
                     <button
                         onClick={() => window.location.href = "/"}
                         className="glow px-3 py-2 rounded-md text-lg font-medium">
