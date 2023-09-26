@@ -58,10 +58,27 @@ export default function Home() {
         Sign In or Sign Up for full access to all this app's features!
       </div>
       <div className="flex justify-center mt-4">
-        <button href="/signIn" className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200">
+        <button
+          onClick={() => {
+            if (isAuthenticated) {
+              alert('You are already signed in.');
+            } else {
+              window.location.href = "/signIn"
+            }
+          }}
+
+          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200">
           Sign In
         </button>
-        <button href="/signUp" className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
+        <button
+          onClick={() => {
+            if (isAuthenticated) {
+              alert('You are already signed up.');
+            } else {
+              window.location.href = "/signUp"
+            }
+          }}
+          className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200">
           Sign Up
         </button>
       </div>
@@ -83,42 +100,52 @@ export default function Home() {
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             ComicBot
           </button>
-          <div className="flex flex-row">
-            <p className="mr-4">
-              Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It's like having a writing partner who's always in a funny mood. Sign up to get access!
-            </p>
-            <button href="/ComicBot">
-              <Image
-                className="self-end mb-2"
-                src={comicBot}
-                alt="comicbot"
-                width='auto'
-                height='300'
-                priority
-              />
-            </button>
+          <div className="flex flex-row flex-wrap sm:flex-nowrap">
+            <div className="flex-1 mr-0 sm:mr-2">
+              <p>
+                Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It's like having a writing partner who's always in a funny mood. Sign up to get access!
+              </p>
+            </div>
+            <div className="flex-shrink-0 w-full sm:w-auto">
+              <button onClick={() => handleRedirect('/ComicBot')}>
+                <Image
+                  className="self-end mb-1"
+                  src={comicBot}
+                  alt="comicbot"
+                  width='auto'
+                  height='350'
+                  priority
+                />
+              </button>
+            </div>
           </div>
+
         </div>
         <div className='jokeLibraryCard text-black m-1 flex flex-col' data-aos="fade-right">
           <button onClick={() => handleRedirect('/jokes')}
             className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200">
             JokePad
           </button>
-          <div className="flex flex-row">
-            <button href="/jokes">
-              <Image
-                className="self-end mb-2"
-                src={jokes}
-                alt="Jokes"
-                width='300'
-                height='auto'
-                priority
-              />
-            </button>
-            <p className="ml-4">
-              Write and store your comedy bits securely. An organized comedian is a successful comedian!
-            </p>
+          <div className="flex flex-row flex-wrap-reverse sm:flex-nowrap">
+            <div className="flex-shrink-0 w-full sm:w-auto">
+              <button onClick={() => handleRedirect('/jokes')}>
+                <Image
+                  className="self-end mb-1"
+                  src={jokes}
+                  alt="Jokes"
+                  width='350'
+                  height='auto'
+                  priority
+                />
+              </button>
+            </div>
+            <div className="flex-1 ml-0 sm:ml-2">
+              <p>
+                With Comedify, you can unleash your comedy genius by writing and working on jokes and bits. Our platform provides a creative space to refine your material and take your comedy to the next level! Sign up to get access!
+              </p>
+            </div>
           </div>
+
         </div>
       </div>
       <Footer />

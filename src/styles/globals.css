@@ -91,9 +91,10 @@ body {
 }
 
 .comicBotCard {
-  padding: 1rem;
-  background-image: linear-gradient(to right, #FFEB3B, #F44336, #E91E63);
-  border-radius: 0.5rem;
+  padding: 1em;
+  margin: 1em;
+  background-image: linear-gradient(to left, #D2B48C, #FFA07A);
+  border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
@@ -101,11 +102,10 @@ body {
 }
 
 .jokeLibraryCard {
-  margin-left: auto;
-  width: 66.666667%;
-  padding: 1rem;
-  background-image: linear-gradient(to left, #4CAF50, #2196F3, #3F51B5);
-  border-radius: 0.5rem;
+  padding: 1em;
+  margin: 1em;
+  background-image: linear-gradient(to left, #D2B48C, #FFA07A);
+  border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
