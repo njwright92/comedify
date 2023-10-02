@@ -93,7 +93,7 @@ body {
 .comicBotCard {
   padding: 1em;
   margin: 1em;
-  background-image: linear-gradient(to left, #D2B48C, #FFA07A);
+  background-color: #A67C52;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: flex;
@@ -104,7 +104,7 @@ body {
 .jokeLibraryCard {
   padding: 1em;
   margin: 1em;
-  background-image: linear-gradient(to left, #D2B48C, #FFA07A);
+  background-color: #A67C52;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: flex;
