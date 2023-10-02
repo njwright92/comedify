@@ -29,11 +29,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-black text-white mt-10" style={{ borderRadius: '3em' }}>
-            <div className="flex justify-between items-center glow">
+        <nav className="bg-black text-white mt-5" style={{ borderRadius: '3.3em' }}>
+            <div className="flex items-center glow">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className=" glow text-5xl ml-3 py-6 text-white lg:hidden"
+                    className=" glow text-5xl ml-3 py-3 text-white lg:hidden"
                 >
                     ≡
                 </button>
