@@ -29,7 +29,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-black text-white fixed top-0 mt-10" style={{ borderRadius: '3em' }}>
+        <nav className="bg-black text-white mt-10" style={{ borderRadius: '3em' }}>
             <div className="flex justify-between items-center glow">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
@@ -45,12 +45,24 @@ const Navbar = () => {
                         Home
                     </button>
                     <button
-                        onClick={() => window.location.href = "/signIn"}
+                        onClick={() => {
+                            if (isAuthenticated) {
+                                alert('You are already signed in.');
+                            } else {
+                                window.location.href = "/signIn"
+                            }
+                        }}
                         className="glow px-3 py-2 rounded-md text-lg font-medium">
                         SignIn
                     </button>
                     <button
-                        onClick={() => window.location.href = "/signUp"}
+                        onClick={() => {
+                            if (isAuthenticated) {
+                                alert('You are already signed up.');
+                            } else {
+                                window.location.href = "/signUp"
+                            }
+                        }}
                         className="glow px-3 py-2 rounded-md text-lg font-medium">
                         SignUp
                     </button>
