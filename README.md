@@ -43,6 +43,9 @@ pnpm dev
 
 Open http://localhost:3000 with your browser to see the result.
 
+Additionally, you'll need to launch a separate terminal instance and execute the command node server/server.js. 
+This step initiates communication with ComicBot, enabling the retrieval of responses.
+
 How to Use
 ComicBot: Navigate to the ComicBot section to start a conversation with the chatbot.
 Jokes & Bits: Go to the Jokes & Bits section to add or view jokes.
