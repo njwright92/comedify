@@ -98,11 +98,12 @@ const ComicBot = () => {
     const handleSend = async () => {
         setIsSaved(false);
         setConversation([...conversation, { from: 'user', text: userInput }]);
+        console.log('Sending this input to bot:', userInput);
         setUserInput('');
 
         try {
             const botResponses = await askComicbot(userInput);
-
+            console.log('Received this response from bot:', botResponses);
 
             const botResponse = botResponses.generated_text;
 
