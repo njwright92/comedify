@@ -16,11 +16,13 @@ const ComicBot = () => {
     const [userInput, setUserInput] = useState('');
     const [isSaved, setIsSaved] = useState(false);
     const [userUID, setUserUID] = useState(auth.currentUser ? auth.currentUser.uid : null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [loadingText, setLoadingText] = useState('Loading');
 
 
     const askComicbot = async (prompt) => {
         try {
-            const res = await axios.post('http://localhost:3001/ask-comicbot/', { prompt });
+            const res = await axios.post('/api/proxy', { prompt });
             return res.data;
         } catch (error) {
             console.error(error);
@@ -40,7 +42,7 @@ const ComicBot = () => {
         };
     }, []);
 
-    
+
     useEffect(() => {
         const fetchConvos = async () => {
             const convoQuery = query(collection(db, "conversations"), where("uid", "==", userUID));
@@ -51,7 +53,7 @@ const ComicBot = () => {
                 messages: doc.data().messages
             }));
 
-            
+
             setAllConversations(fetchedConvos);
         };
 
@@ -60,7 +62,7 @@ const ComicBot = () => {
         }
     }, [userUID]);
 
-    
+
     const saveConversation = async () => {
         const userUID = auth.currentUser ? auth.currentUser.uid : null;
         console.log("Saving conversation for UID:", userUID);
@@ -84,7 +86,7 @@ const ComicBot = () => {
     const deleteConversation = async (docID) => {
         try {
             await deleteDoc(doc(db, "conversations", docID));
-            
+
             setAllConversations(allConversations.filter(convo => convo.id !== docID));
         } catch (error) {
             console.error("Error deleting document: ", error);
@@ -96,21 +98,31 @@ const ComicBot = () => {
     };
 
     const handleSend = async () => {
+        setIsLoading(true);
         setIsSaved(false);
         setConversation([...conversation, { from: 'user', text: userInput }]);
         console.log('Sending this input to bot:', userInput);
         setUserInput('');
 
+        const loadingInterval = setInterval(() => {
+            setLoadingText(prev => prev + '.');
+            if (loadingText.length > 'Loading...'.length) {
+                setLoadingText('Loading');
+            }
+        }, 500);
+
         try {
             const botResponses = await askComicbot(userInput);
             console.log('Received this response from bot:', botResponses);
 
-            const botResponse = botResponses.generated_text;
-
+            const botResponse = botResponses.response;
 
             setConversation(prevConversation => [...prevConversation, { from: 'bot', text: botResponse }]);
         } catch (error) {
             console.error(error);
+        } finally {
+            clearInterval(loadingInterval);  // Stop loading animation
+            setIsLoading(false);
         }
     };
 
@@ -144,24 +156,36 @@ const ComicBot = () => {
                         className="p-2 border border-black rounded text-black resize-y"
                         placeholder="ask me anything.."
                         rows="2"
+                        disabled={isLoading}
                     />
                     <button
                         onClick={handleSend}
+                        disabled={isLoading}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded mt-4 glow"
                     >
                         Send
                     </button>
+                    {isLoading && (
+                        <div className="loading-indicator">
+                            Loading...
+                        </div>
+                    )}
                 </div>
                 <div className="w-full mx-auto conversation">
                     {conversation.map((message, index) => (
                         <div key={index} className={message.from === 'bot' ? 'bot-message-container' : 'user-message-container'}>
-                            <span className="text-black m-2">{message.from === 'bot' ? 'ComicBot:..' : '...You'}
-                            </span>
+                            <span className="text-black m-2">{message.from === 'bot' ? 'ComicBot:..' : '...You'}</span>
                             <p className={message.from === 'bot' ? 'bot-message' : 'user-message'}>
                                 {message.text}
                             </p>
                         </div>
                     ))}
+                    {isLoading && (
+                        <div className="bot-message-container">
+                            <span className="text-black m-2">ComicBot:..</span>
+                            <p className="bot-message">{loadingText}</p>
+                        </div>
+                    )}
                 </div>
                 <button
                     onClick={saveConversation}
