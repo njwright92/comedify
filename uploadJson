@@ -1,0 +1,21 @@
+import fs from 'fs';
+import OpenAI from 'openai';
+
+const openai = new OpenAI("your-openai-api-key-here");
+
+// Upload the training file
+const fileUploadResponse = await openai.files.create({
+  file: fs.createReadStream('trainingScripts.jsonl'),
+  purpose: 'fine-tune'
+});
+
+const fileId = fileUploadResponse.data.id;  // Extract the file ID from the response
+
+// Start the fine-tuning process
+const fineTuneResponse = await openai.fineTunes.create({
+  training_file: fileId,
+  model: 'gpt-3.5-turbo'
+});
+
+console.log(`Fine-tuning started: ${fineTuneResponse.data.id}`);
+
