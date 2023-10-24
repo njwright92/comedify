@@ -2,6 +2,8 @@ import { auth, provider } from '../firebase/firebase';
 import { useRouter } from 'next/router';
 import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import Navbar from "../components/navbar";
+import Image from 'next/image';
+import Link from 'next/link';
 
 const SignUp = () => {
     const router = useRouter(); // Initialize useRouter hook
@@ -87,18 +89,20 @@ const SignUp = () => {
                         className="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-2 px-5 border border-gray-400 rounded shadow mt-2"
                         onClick={handleGoogleSignIn}
                     >
-                        <img
+                        <Image
                             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                             alt="Google Logo"
                             className="inline-block h-5 w-5 mr-2 align-middle"
+                            width={20}
+                            height={20}
                         />
                         Sign Up with Google
                     </button>
                 </div>
                 <div className="text-center mt-2 ">
                     <p>Already have an account?
-                        <a href="/signIn" className="underline glow"> Sign In
-                        </a>
+                        <Link href="/signIn" className="underline glow"> Sign In
+                        </Link>
                     </p>
                 </div>
 

@@ -9,7 +9,6 @@ import jokes from '../Img/jokes.png'
 import Footer from '../components/footer'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import ComicBot from './ComicBot';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -55,7 +54,7 @@ export default function Home() {
       <div className="text-2xl text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
         style={{ borderRadius: '3em' }}
         data-aos="zoom-in">
-        Sign In or Sign Up for full access to all this app's features!
+        Sign In or Sign Up for full access to all this app&apos;s features!
       </div>
       <div className="flex justify-center mt-4">
         <button
@@ -103,7 +102,7 @@ export default function Home() {
           <div className="flex flex-row flex-wrap sm:flex-nowrap">
             <div className="flex-1 mr-0 sm:mr-2">
               <p>
-                Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It's like having a writing partner who's always in a funny mood. Sign up to get access!
+                Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It&apos;s like having a writing partner who&apos;s always in a funny mood. Sign up to get access!
               </p>
             </div>
             <div className="flex-shrink-0 w-full sm:w-auto">

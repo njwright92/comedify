@@ -1,7 +1,9 @@
-import { useRouter } from 'next/router'; // Import useRouter
+import { useRouter } from 'next/router';
 import { auth, provider } from '../firebase/firebase';
 import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import Navbar from "../components/navbar";
+import Image from 'next/image'
+import Link from 'next/link';
 
 const SignIn = () => {
     const router = useRouter(); // Initialize useRouter
@@ -31,7 +33,7 @@ const SignIn = () => {
                 alert(`Sign-in failed: ${error.message}`);
             });
     };
-    
+
     return (
         <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
             <Navbar />
@@ -78,10 +80,12 @@ const SignIn = () => {
                         className="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-2 px-5 border border-gray-400 rounded shadow mt-2"
                         onClick={handleGoogleSignIn}
                     >
-                        <img
+                        <Image
                             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                             alt="Google Logo"
                             className="inline-block h-5 w-5 mr-2 align-middle"
+                            width={20}
+                            height={20}
                         />
                         Sign In with Google
                     </button>
@@ -89,7 +93,8 @@ const SignIn = () => {
                 </div>
                 <div className="text-center mt-4">
                     <p>Need to
-                        <a href="/signUp" className="underline glow"> Sign Up?</a>
+                        <Link href="/signUp" className="underline glow">Sign Up?
+                        </Link>
                     </p>
                 </div>
             </div>
