@@ -4,9 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-train_model.py
-firebase.js
-firebase
 
 # testing
 /coverage
