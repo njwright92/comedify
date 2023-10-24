@@ -9,8 +9,8 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}    
+    environment:
+      name: firebaseEnv
     steps:
       - uses: actions/checkout@v3
 
