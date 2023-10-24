@@ -102,7 +102,7 @@ export default function Home() {
           <div className="flex flex-row flex-wrap sm:flex-nowrap">
             <div className="flex-1 mr-0 sm:mr-2">
               <p>
-                Your personal comedy bit creation assistant. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It&apos;s like having a writing partner who&apos;s always in a funny mood. Sign up to get access!
+                Your personal comedy bit creation assistant fine-tuned from a llm on comedy scripts. Utilizing cutting-edge GPT technology, ComicBot engages you in a conversational interface to help you craft the funniest bits. It&apos;s like having a writing partner who&apos;s always in a funny mood. Sign up to get access!
               </p>
             </div>
             <div className="flex-shrink-0 w-full sm:w-auto">
