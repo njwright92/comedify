@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/firebase';
+import { auth } from '../../firebase';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

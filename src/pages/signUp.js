@@ -1,4 +1,4 @@
-import { auth, provider } from '../firebase/firebase';
+import { auth, provider } from '../../firebase';
 import { useRouter } from 'next/router';
 import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import Navbar from "../components/navbar";

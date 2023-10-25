@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Navbar from '../components/navbar';
 import axios from 'axios';
 import { onAuthStateChanged } from 'firebase/auth';
-import { db, auth } from '../firebase/firebase';
+import { db, auth } from '../../firebase';
 import { addDoc, collection, query, where, doc, deleteDoc, getDocs } from "firebase/firestore";
 import { signOut } from 'firebase/auth';
 import Footer from '@/components/footer';
