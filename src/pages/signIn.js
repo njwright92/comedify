@@ -8,15 +8,14 @@ import Link from 'next/link';
 const SignIn = () => {
     const router = useRouter(); // Initialize useRouter
 
-    const handleGoogleSignIn = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                alert('Successfully signed in with Google!');
-                router.push('/'); // Redirect to homepage
-            })
-            .catch((error) => {
-                alert(`Sign-in failed: ${error.message}`);
-            });
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            alert('Successfully signed in with Google!');
+            router.push('/'); // Redirect to homepage
+        } catch (error) {
+            alert(`Sign-in failed: ${error.message}`);
+        }
     };
 
     const handleEmailPasswordSignIn = (e) => {
@@ -53,6 +52,7 @@ const SignIn = () => {
                             type="email"
                             id="email"
                             name="email"
+                            autoComplete="current-email"
                             className="p-2 w-full border rounded text-black" required />
                     </div>
                     <div className="mb-4">
@@ -64,6 +64,7 @@ const SignIn = () => {
                             type="password"
                             id="password"
                             name="password"
+                            autoComplete="current-password"
                             className="p-2 w-full border rounded text-black" required />
                     </div>
                     <div className="text-center">
