@@ -13,18 +13,14 @@ jobs:
       name: firebaseEnv
     steps:
       - uses: actions/checkout@v3
-
-      # Add this step to set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: '16.13.2'
-
-      # Add this step to install dependencies
       - name: Install dependencies
         run: npm install
-      - run: echo ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-
+      - name: Set Firebase API Key
+        run: echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> $GITHUB_ENV
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
