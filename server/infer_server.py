@@ -5,17 +5,15 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 app = Flask(__name__)
 
 # Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5")
-model = AutoModelForCausalLM.from_pretrained(
-    "microsoft/phi-1_5", trust_remote_code=True
-)
+tokenizer = AutoTokenizer.from_pretrained("AlekseyKorshuk/comedy-scripts")
+model = AutoModelForCausalLM.from_pretrained("AlekseyKorshuk/comedy-scripts")
 
 
 def generate_response(message):
     inputs = tokenizer(message, return_tensors='pt', truncation=True)
     outputs = model.generate(
         **inputs,
-        max_length=150,
+        max_length=500,
         pad_token_id=tokenizer.eos_token_id
     )
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)

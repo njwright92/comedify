@@ -6,36 +6,36 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const SignUp = () => {
-    const router = useRouter(); // Initialize useRouter hook
+    const router = useRouter();
 
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
             alert('Successfully signed in with Google!');
-            router.push('/'); // Redirect to homepage
+            router.push('/');
         } catch (error) {
-            alert(`Sign-in failed: ${error.message}`);
+            alert(`Sign-in failed:`);
         }
     };
-    const handleEmailPasswordSignUp = (e) => {
+    const handleEmailPasswordSignUp = async (e) => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
 
         if (password !== confirmPassword) {
-            alert('Passwords do not match.'); // Pop-up message
+            alert('Passwords do not match.');
             return;
         }
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                alert('Successfully signed up!'); // Pop-up message
-                router.push('/'); // Navigate to homepage
-            })
-            .catch((error) => {
-                alert(`Sign-up failed: ${error.message}`); // Pop-up message
-            });
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            alert('Successfully signed up!'); 
+            router.push('/');
+        } catch (error) {
+            alert(`Sign-up failed:`);
+        }
     };
+
 
     return (
         <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">

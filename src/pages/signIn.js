@@ -6,31 +6,30 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 const SignIn = () => {
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter();
 
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
             alert('Successfully signed in with Google!');
-            router.push('/'); // Redirect to homepage
+            router.push('/');
         } catch (error) {
-            alert(`Sign-in failed: ${error.message}`);
+            alert(`Sign-in failed:`);
         }
     };
 
-    const handleEmailPasswordSignIn = (e) => {
+    const handleEmailPasswordSignIn = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                alert('Successfully signed in!');
-                router.push('/'); // Redirect to homepage
-            })
-            .catch((error) => {
-                alert(`Sign-in failed: ${error.message}`);
-            });
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            alert('Successfully signed in!');
+            router.push('/');
+        } catch (error) {
+            alert(`Sign-in failed:`);
+        }
     };
 
     return (

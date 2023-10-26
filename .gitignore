@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+.firebase
 # next.js
 /.next/
 /out/
@@ -33,3 +33,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.firebase/hosting.b3V0.cache
+.firebase/hosting.b3V0.cache
