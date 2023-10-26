@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Initialize Flask app and CORS
 app = Flask(__name__)
 
 # Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("AlekseyKorshuk/comedy-scripts")
-model = AutoModelForCausalLM.from_pretrained("AlekseyKorshuk/comedy-scripts")
+tokenizer = AutoTokenizer.from_pretrained("facebook/blenderbot_small-90M")
+model = AutoModelForSeq2SeqLM.from_pretrained("facebook/blenderbot_small-90M")
 
 
 def generate_response(message):
