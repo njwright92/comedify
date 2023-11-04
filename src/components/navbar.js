@@ -29,7 +29,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-black text-white mt-5" style={{ borderRadius: '3.3em' }}>
+        <nav className="text-white mt-5 sticky top-5 px-5" style={{ borderRadius: '.675em' }}>
             <div className="flex items-center glow">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
