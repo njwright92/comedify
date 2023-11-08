@@ -9,10 +9,11 @@ import jokes from "../Img/jokes.png";
 import Footer from "../components/footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const initAOS = () => {
@@ -32,17 +33,17 @@ export default function Home() {
     };
   }, []);
 
-  const handleAuthenticatedClick = (message) => {
-    if (isAuthenticated) {
-      alert(message);
-    } else {
-      // Redirect is handled by Link component
-    }
+  const handleAlert = (message) => {
+    alert(message);
   };
 
-  const handleAlert = (message) => {
-    if (!isAuthenticated) {
-      alert(message);
+  const handleNavigation = (path, isAuthRequired = false) => {
+    if (isAuthRequired && isAuthenticated) {
+      router.push(path);
+    } else if (!isAuthenticated) {
+      handleAlert("Please Sign In or Sign Up!");
+    } else {
+      router.push(path);
     }
   };
 
@@ -64,13 +65,25 @@ export default function Home() {
       </div>
       <div className="flex justify-center mt-4">
         <button
-          onClick={() => handleAuthenticatedClick("You are already signed in.")}
+          onClick={() => {
+            if (isAuthenticated) {
+              handleAlert("You're already signed in.");
+            } else {
+              router.push("/signIn");
+            }
+          }}
           className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
         >
           Sign In
         </button>
         <button
-          onClick={() => handleAuthenticatedClick("You are already signed up.")}
+          onClick={() => {
+            if (isAuthenticated) {
+              handleAlert("You're already signed up.");
+            } else {
+              router.push("/signUp");
+            }
+          }}
           className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200"
         >
           Sign Up
@@ -93,14 +106,13 @@ export default function Home() {
           className="comicBotCard text-black m-1 flex flex-col"
           data-aos="fade-left"
         >
-          <Link href="/ComicBot">
-            <button
-              onClick={() => handleAlert("Please Sign In or Sign Up.")}
-              className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
-            >
-              ComicBot
-            </button>
-          </Link>
+          <button
+            onClick={() => handleNavigation("/ComicBot", true)}
+            className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+          >
+            ComicBot
+          </button>
+
           <div className="flex flex-row flex-wrap sm:flex-nowrap">
             <div className="flex-1 mr-0 sm:mr-2">
               <p>
@@ -112,7 +124,10 @@ export default function Home() {
               </p>
             </div>
             <div className="flex-shrink-0 w-full sm:w-auto">
-              <Link href="/ComicBot">
+              <button
+                onClick={() => handleNavigation("/ComicBot", true)}
+                className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+              >
                 <Image
                   className="self-end mb-1"
                   src={comicBot}
@@ -121,7 +136,7 @@ export default function Home() {
                   height="350"
                   priority
                 />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -129,17 +144,19 @@ export default function Home() {
           className="jokeLibraryCard text-black m-1 flex flex-col"
           data-aos="fade-right"
         >
-          <Link href="/jokes">
-            <button
-              onClick={() => handleAlert("Please Sign In or Sign Up.")}
-              className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
-            >
-              JokePad
-            </button>
-          </Link>
+          <button
+            onClick={() => handleNavigation("/jokes", true)}
+            className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+          >
+            JokePad
+          </button>
+
           <div className="flex flex-row flex-wrap-reverse sm:flex-nowrap">
             <div className="flex-shrink-0 w-full sm:w-auto">
-              <Link href="/jokes">
+              <button
+                onClick={() => handleNavigation("/jokes", true)}
+                className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+              >
                 <Image
                   className="self-end mb-1"
                   src={jokes}
@@ -148,7 +165,7 @@ export default function Home() {
                   height="auto"
                   priority
                 />
-              </Link>
+              </button>
             </div>
             <div className="flex-1 ml-0 sm:ml-2">
               <p>
