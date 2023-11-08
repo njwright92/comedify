@@ -19,9 +19,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255; /* White text color */
-    --background-start-rgb: 10, 25, 47; /* Dark blue start */
-    --background-end-rgb: 28, 58, 95; /* Slightly lighter blue end */
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 10, 25, 47;
+    --background-end-rgb: 28, 58, 95;
   }
 }
 

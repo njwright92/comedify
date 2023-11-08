@@ -16,15 +16,6 @@ import {
 import { signOut } from "firebase/auth";
 import Footer from "@/components/footer";
 
-const askComicbot = async (prompt) => {
-  try {
-    const res = await axios.post("/api/proxy", { prompt });
-    return res.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 const ComicBot = () => {
   const router = useRouter();
   const [allConversations, setAllConversations] = useState([]);
@@ -36,6 +27,17 @@ const ComicBot = () => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Loading");
+
+  const askComicbot = async (prompt) => {
+    try {
+      const res = await axios.post("/api/proxy", JSON.stringify(prompt), {
+        headers: { "Content-Type": "application/json" },
+      });
+      return res.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -125,7 +127,7 @@ const ComicBot = () => {
       const botResponses = await askComicbot(userInput);
       console.log("Received this response from bot:", botResponses);
 
-      const botResponse = botResponses.response;
+      const botResponse = botResponses[0].generated_text;
 
       setConversation((prevConversation) => [
         ...prevConversation,
@@ -134,7 +136,7 @@ const ComicBot = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      clearInterval(loadingInterval); // Stop loading animation
+      clearInterval(loadingInterval);
       setIsLoading(false);
     }
   };
