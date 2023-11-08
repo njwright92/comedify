@@ -5,8 +5,8 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 app = Flask(__name__)
 
 # Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("facebook/blenderbot_small-90M")
-model = AutoModelForSeq2SeqLM.from_pretrained("facebook/blenderbot_small-90M")
+tokenizer = AutoTokenizer.from_pretrained("njwrigh92/t-5-comedy")
+model = AutoModelForSeq2SeqLM.from_pretrained("njwrigh92/t-5-comedy")
 
 
 def generate_response(message):
