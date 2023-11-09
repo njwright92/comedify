@@ -4,7 +4,8 @@ import { auth } from "../../firebase";
 import Image from "next/image";
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import comicBot from "../Img/Comic.png";
+import comic from "../Img/Comic.png";
+import comicBot from "../Img/comicLogo.jpeg";
 import jokes from "../Img/jokes.png";
 import Footer from "../components/footer";
 import AOS from "aos";
@@ -94,7 +95,7 @@ export default function Home() {
       </h1>
       <Image
         className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] m-10 mx-auto"
-        src={comicBot}
+        src={comic}
         alt="Comic Logo"
         width={350}
         height="auto"
