@@ -8,7 +8,7 @@ const headers = {
 
 module.exports = async (req, res) => {
   try {
-    const response = await axios.post(API_URL, req.body, { headers: headers });
+    const response = await axios.post(API_URL, req.body, { headers });
     res.status(200).json(response.data);
   } catch (error) {
     console.error("Error proxying request:", error);
