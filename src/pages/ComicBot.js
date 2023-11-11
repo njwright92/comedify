@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
-import axios from "axios";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db, auth } from "../../firebase";
 import {
@@ -29,12 +28,24 @@ const ComicBot = () => {
 
   const askComicbot = async (prompt) => {
     try {
-      const res = await axios.post("/api/proxy", JSON.stringify(prompt), {
-        headers: { "Content-Type": "application/json" },
-      });
-      return res.data;
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/njwrigh92/t-5-comedy",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer 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",
+          },
+          body: JSON.stringify({ inputs: prompt }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
     } catch (error) {
-      console.error(error);
+      console.error("Error making request:", error);
     }
   };
 
@@ -74,7 +85,6 @@ const ComicBot = () => {
 
   const saveConversation = async () => {
     const userUID = auth.currentUser ? auth.currentUser.uid : null;
-    console.log("Saving conversation for UID:", userUID);
     if (userUID) {
       try {
         const convoCollection = collection(db, "conversations");
@@ -82,7 +92,6 @@ const ComicBot = () => {
           uid: userUID,
           messages: conversation,
         });
-        console.log("Conversation saved");
         setAllConversations([...allConversations, conversation]);
         setConversation([]);
       } catch (error) {
@@ -112,7 +121,6 @@ const ComicBot = () => {
     setIsLoading(true);
     setIsSaved(false);
     setConversation([...conversation, { from: "user", text: userInput }]);
-    console.log("Sending this input to bot:", userInput);
     setUserInput("");
 
     const loadingInterval = setInterval(() => {
@@ -121,19 +129,19 @@ const ComicBot = () => {
         setLoadingText("Loading");
       }
     }, 500);
-
     try {
       const botResponses = await askComicbot(userInput);
-      console.log("Received this response from bot:", botResponses);
-
-      const botResponse = botResponses[0].generated_text;
-
-      setConversation((prevConversation) => [
-        ...prevConversation,
-        { from: "bot", text: botResponse },
-      ]);
+      if (botResponses && botResponses.length > 0) {
+        const botResponse = botResponses[0].generated_text;
+        setConversation((prevConversation) => [
+          ...prevConversation,
+          { from: "bot", text: botResponse },
+        ]);
+      } else {
+        console.error("Unexpected response format:", botResponses);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error in handleSend:", error);
     } finally {
       clearInterval(loadingInterval);
       setIsLoading(false);

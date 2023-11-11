@@ -71,7 +71,6 @@ const Jokes = () => {
         uid: userUID,
       });
       const newDocId = docRef.id;
-      console.log("Document written with ID: ", docRef.id);
       setJokes([{ id: newDocId, joke: newJoke }, ...jokes]);
       setNewJoke("");
     } catch (error) {
