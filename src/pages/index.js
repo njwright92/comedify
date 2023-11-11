@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 import Image from "next/image";
@@ -16,37 +16,37 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
+  const initAOS = () => {
+    AOS.init({
+      duration: 2000,
+    });
+  };
   useEffect(() => {
-    const initAOS = () => {
-      AOS.init({
-        duration: 2000,
-      });
-    };
-
     initAOS();
-
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
     });
-
     return () => {
       unsubscribe();
     };
   }, []);
 
-  const handleAlert = (message) => {
+  const handleAlert = useCallback((message) => {
     alert(message);
-  };
+  }, []);
 
-  const handleNavigation = (path, isAuthRequired = false) => {
-    if (isAuthRequired && isAuthenticated) {
-      router.push(path);
-    } else if (!isAuthenticated) {
-      handleAlert("Please Sign In or Sign Up!");
-    } else {
-      router.push(path);
-    }
-  };
+  const handleNavigation = useCallback(
+    (path, isAuthRequired = false) => {
+      if (isAuthRequired && isAuthenticated) {
+        router.push(path);
+      } else if (!isAuthenticated) {
+        handleAlert("Please Sign In or Sign Up!");
+      } else {
+        router.push(path);
+      }
+    },
+    [handleAlert, isAuthenticated, router]
+  );
 
   return (
     <main

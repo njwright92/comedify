@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import axios from "axios";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db, auth } from "../../firebase";
 import {
   addDoc,
@@ -13,7 +13,6 @@ import {
   deleteDoc,
   getDocs,
 } from "firebase/firestore";
-import { signOut } from "firebase/auth";
 import Footer from "@/components/footer";
 
 const ComicBot = () => {

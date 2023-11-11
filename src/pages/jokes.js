@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import {
   doc,
   query,
@@ -13,7 +13,6 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
-import { signOut } from "firebase/auth";
 import "font-awesome/css/font-awesome.min.css";
 import Footer from "@/components/footer";
 
@@ -59,10 +58,7 @@ const Jokes = () => {
     if (userUID) {
       fetchJokes();
     }
-    return () => {
-      // Clean up the subscription when the component unmounts
-      // or when the userUID changes
-    };
+    return () => {};
   }, [userUID]);
 
   const handleSubmit = async (e) => {
@@ -126,7 +122,7 @@ const Jokes = () => {
     } catch (error) {
       alert(`An error occurred: ${error.message}`);
     }
-  }
+  };
 
   return (
     <main
