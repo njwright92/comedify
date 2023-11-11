@@ -144,6 +144,8 @@ const Jokes = () => {
               Write Your Joke/Bit:
             </label>
             <textarea
+              id="joke"
+              name="joke"
               type="text"
               value={newJoke}
               onChange={handleInputChange}

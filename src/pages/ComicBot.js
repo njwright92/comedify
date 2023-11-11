@@ -166,6 +166,7 @@ const ComicBot = () => {
         </button>
         <div className="input-area flex flex-col items-center">
           <textarea
+            name="userInput"
             value={userInput}
             onChange={handleInputChange}
             className="p-2 border border-black rounded text-black resize-y"
