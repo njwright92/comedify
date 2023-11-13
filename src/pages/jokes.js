@@ -126,14 +126,20 @@ const Jokes = () => {
   return (
     <main
       className="flex flex-col p-3"
-      style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+      style={{
+        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontWeight: "bold",
+        backgroundColor: "rgb(var(--background-rgb))",
+        color: "rgb(var(--foreground-rgb))",
+      }}
     >
       <Navbar />
       <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
-      <div className="w-full mx-auto shadow-md rounded-md text-white relative">
+      <div className="w-full mx-auto shadow-md rounded-md text-white relative bg-gray-800">
         <button
           onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200 absolute top-4 right-4"
+          className="glow px-2 py-1 rounded-md text-sm font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
+          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
         >
           Sign Out
         </button>
@@ -149,7 +155,7 @@ const Jokes = () => {
               value={newJoke}
               onChange={handleInputChange}
               placeholder="Write your bit.."
-              className=" rounded text-black"
+              className="rounded text-white bg-gray-700"
               rows="4"
               required
             />
@@ -157,7 +163,8 @@ const Jokes = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded glow"
+              className="mt-5 bg-magenta-500 hover:bg-magenta-600 text-white px-5 py-2 rounded glow"
+              style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
             >
               Add Joke
             </button>

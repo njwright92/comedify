@@ -4,7 +4,7 @@ import { auth } from "../../firebase";
 import Image from "next/image";
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import comic from "../Img/Comic.png";
+import comic from "../Img/Comics.jpg";
 import comicBot from "../Img/comicLogo.jpeg";
 import jokes from "../Img/jokes.png";
 import Footer from "../components/footer";
@@ -51,15 +51,18 @@ export default function Home() {
   return (
     <main
       className="flex flex-col"
-      style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+      style={{
+        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontWeight: "bold",
+      }}
     >
       <Head>
         <title>Comedify!</title>
       </Head>
       <Navbar />
       <div
-        className="text-2xl text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
-        style={{ borderRadius: "3em" }}
+        className="text-2xl text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
+        style={{ borderRadius: "3em", boxShadow: "var(--neumorphism-shadow)" }}
         data-aos="zoom-in"
       >
         Sign In or Sign Up for full access to all this app&apos;s features!
@@ -73,7 +76,7 @@ export default function Home() {
               router.push("/signIn");
             }
           }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
+          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-gray-700 text-white hover:bg-gray-800 transition duration-200"
         >
           Sign In
         </button>
@@ -85,7 +88,8 @@ export default function Home() {
               router.push("/signUp");
             }
           }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium bg-green-500 text-white hover:bg-green-600 transition duration-200"
+          className="glow px-6 py-3 rounded-md text-lg font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200"
+          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
         >
           Sign Up
         </button>
@@ -104,12 +108,12 @@ export default function Home() {
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div
-          className="comicBotCard text-black m-1 flex flex-col"
+          className="comicBotCard text-white m-1 flex flex-col"
           data-aos="fade-left"
         >
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
-            className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
           >
             ComicBot
           </button>
@@ -127,7 +131,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/ComicBot", true)}
-                className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
               >
                 <Image
                   className="self-end mb-1"
@@ -142,12 +146,12 @@ export default function Home() {
           </div>
         </div>
         <div
-          className="jokeLibraryCard text-black m-1 flex flex-col"
+          className="jokeLibraryCard text-white m-1 flex flex-col"
           data-aos="fade-right"
         >
           <button
             onClick={() => handleNavigation("/jokes", true)}
-            className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
           >
             JokePad
           </button>
@@ -156,7 +160,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/jokes", true)}
-                className="text-3xl mb-3 p-1 bg-black glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
               >
                 <Image
                   className="self-end mb-1"

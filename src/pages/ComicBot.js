@@ -29,7 +29,7 @@ const ComicBot = () => {
   const askComicbot = async (prompt) => {
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/njwrigh92/t-5-comedy",
+        "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta",
         {
           method: "POST",
           headers: {
@@ -161,14 +161,19 @@ const ComicBot = () => {
   return (
     <main
       className="flex flex-col p-3"
-      style={{ fontFamily: "'Comic Sans MS', cursive, sans-serif" }}
+      style={{
+        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        backgroundColor: "rgb(var(--background-rgb))",
+        fontWeight: "bold",
+      }}
     >
       <Navbar />
       <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
-      <div className="w-full mx-auto m-2 mt-5 bg-white p-8 shadow-md rounded-md relative">
+      <div className="w-full mx-auto m-2 mt-5 bg-gray-800 p-8 shadow-md rounded-md relative">
         <button
           onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium bg-red-500 text-white hover:bg-red-600 transition duration-200 absolute top-4 right-4"
+          className="glow px-2 py-1 rounded-md text-sm font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
+          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
         >
           Sign Out
         </button>
@@ -177,7 +182,7 @@ const ComicBot = () => {
             name="userInput"
             value={userInput}
             onChange={handleInputChange}
-            className="p-2 border border-black rounded text-black resize-y"
+            className="p-2 border border-gray-700 rounded text-white bg-gray-700 resize-y"
             placeholder="ask me anything.."
             rows="2"
             disabled={isLoading}
@@ -185,13 +190,14 @@ const ComicBot = () => {
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded mt-4 glow"
+            className="bg-magenta-500 hover:bg-magenta-600 text-white px-5 py-2 rounded mt-4 glow"
+            style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
           >
             Send
           </button>
           {isLoading && <div className="loading-indicator">Loading...</div>}
         </div>
-        <div className="w-full mx-auto conversation">
+        <div className="w-full mx-auto conversation-container">
           {conversation.map((message, index) => (
             <div
               key={index}
@@ -201,7 +207,7 @@ const ComicBot = () => {
                   : "user-message-container"
               }
             >
-              <span className="text-black m-2">
+              <span className="text-white m-2">
                 {message.from === "bot" ? "ComicBot:.." : "...You"}
               </span>
               <p
@@ -215,21 +221,21 @@ const ComicBot = () => {
           ))}
           {isLoading && (
             <div className="bot-message-container">
-              <span className="text-black m-2">ComicBot:..</span>
+              <span className="text-white m-2">ComicBot:..</span>
               <p className="bot-message">{loadingText}</p>
             </div>
           )}
         </div>
         <button
           onClick={saveConversation}
-          className="bg-green-500 hover:bg-green-600 text-black px-5 py-2 rounded mt-4 glow"
+          className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded mt-4"
           disabled={isSaved}
         >
           {isSaved ? "Conversation Saved" : "Save Conversation"}
         </button>
 
         <div className="previous-conversations">
-          <h2 className="text-2xl text-black text-center mb-4">
+          <h2 className="text-2xl text-white text-center mb-4">
             Previous Conversations
           </h2>
           {allConversations.map((convo, index) => (
@@ -248,7 +254,7 @@ const ComicBot = () => {
                       : "user-message-container"
                   }
                 >
-                  <span className="text-black m-2">
+                  <span className="text-white m-2">
                     {message.from === "bot" ? "ComicBot:.." : "...You"}
                   </span>
                   <p

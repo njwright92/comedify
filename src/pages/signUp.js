@@ -1,8 +1,7 @@
-import { auth, provider } from "../../firebase";
+import { auth, provider, db } from "../../firebase";
 import { useRouter } from "next/router";
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import Navbar from "../components/navbar";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,10 +57,10 @@ const SignUp = () => {
   };
 
   return (
-    <main className="bg-gradient-to-b from-rgb(var(--background-start-rgb)) to-rgb(var(--background-end-rgb)) min-h-screen p-8">
+    <main className="bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen p-8">
       <Navbar />
       <h1 className="text-4xl text-white text-center mb-10 glow">Sign Up</h1>
-      <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-rgb(var(--background-end-rgb)) p-8 shadow-md rounded-md text-white">
+      <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-gray-800 p-8 shadow-md rounded-md text-white">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -77,7 +76,7 @@ const SignUp = () => {
               id="email"
               name="email"
               autoComplete="current-email"
-              className="p-2 w-full border rounded text-black"
+              className="p-2 w-full border border-gray-700 rounded text-white bg-gray-700"
               required
             />
           </div>
@@ -93,7 +92,7 @@ const SignUp = () => {
               id="password"
               name="password"
               autoComplete="new-password"
-              className="p-2 w-full border rounded text-black"
+              className="p-2 w-full border border-gray-700 rounded text-white bg-gray-700"
               required
             />
           </div>
@@ -109,14 +108,15 @@ const SignUp = () => {
               id="confirmPassword"
               name="confirmPassword"
               autoComplete="new-password"
-              className="p-2 w-full border rounded text-black"
+              className="p-2 w-full border border-gray-700 rounded text-white bg-gray-700"
               required
             />
           </div>
           <div className="text-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded glow"
+              className="bg-magenta-500 hover:bg-magenta-600 text-white px-5 py-2 rounded glow"
+              style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
             >
               Sign Up
             </button>
@@ -125,7 +125,8 @@ const SignUp = () => {
         <div className="text-center mt-2 ">
           <button
             type="button"
-            className="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-2 px-5 border border-gray-400 rounded shadow mt-2"
+            className="text-white hover:bg-gray-700 font-semibold py-2 px-5 border border-gray-500 rounded shadow mt-2"
+            style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
             onClick={handleGoogleSignIn}
           >
             <Image
