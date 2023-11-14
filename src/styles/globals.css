@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-rgb: 28, 10, 20;
+  --background-rgb: 32, 20, 30;
   --deep-red: 139, 0, 0;
   --mustard: 205, 179, 128;
   --bright-pastel: 255, 182, 193;
@@ -38,7 +38,11 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-rgb: 15, 15, 20;
+    --background-rgb: 32, 20, 30;
+    --deep-red: 139, 0, 0;
+    --mustard: 205, 179, 128;
+    --bright-pastel: 255, 182, 193;
+    --neon-blue: 77, 182, 255;
   }
 }
 
@@ -62,8 +66,8 @@ body {
 }
 
 .glow {
-  text-shadow: 0 0 0.625em rgb(var(--bright-pastel)),
-    0 0 1.25em rgb(var(--neon-blue));
+  text-shadow: 0 0 0.75em rgb(var(--bright-pastel)),
+    0 0 2em rgb(var(--neon-blue));
 }
 
 .comicBotCard,
