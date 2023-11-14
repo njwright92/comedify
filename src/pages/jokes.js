@@ -127,7 +127,7 @@ const Jokes = () => {
     <main
       className="flex flex-col p-3"
       style={{
-        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontFamily: "'Comic Sans MS', sans-serif",
         fontWeight: "bold",
         backgroundColor: "rgb(var(--background-rgb))",
         color: "rgb(var(--foreground-rgb))",
@@ -135,11 +135,20 @@ const Jokes = () => {
     >
       <Navbar />
       <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
-      <div className="w-full mx-auto shadow-md rounded-md text-white relative bg-gray-800">
+      <div
+        className="w-full mx-auto shadow-md rounded-md text-white relative"
+        style={{
+          backgroundColor: "rgba(var(--deep-red), 0.2)",
+          boxShadow: "var(--neumorphism-shadow)",
+        }}
+      >
         <button
           onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
-          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
+          className="glow px-2 py-1 rounded-md text-sm font-medium text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
+          style={{
+            backgroundColor: `rgba(var(--mustard), 0.8)`,
+            color: "rgb(var(--deep-red))",
+          }}
         >
           Sign Out
         </button>
@@ -163,8 +172,8 @@ const Jokes = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="mt-5 bg-magenta-500 hover:bg-magenta-600 text-white px-5 py-2 rounded glow"
-              style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
+              className="mt-5 bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded glow"
+              style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
             >
               Add Joke
             </button>
@@ -208,7 +217,7 @@ const Jokes = () => {
                     onClick={() => handleEditClick(index)}
                   ></i>
                   <i
-                    className="fa fa-lg fa-trash text-gray-500 hover:text-gray-800 cursor-pointer ml-3"
+                    className="fa fa-lg fa-trash text-red-600 hover:text-gray-800 cursor-pointer ml-3"
                     aria-hidden="true"
                     onClick={() => handleDelete(index, joke)}
                   ></i>

@@ -35,13 +35,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className="text-white mt-5 sticky top-5 px-5"
+      className="text-white mt-5 sticky top-5 px-3"
       style={{ borderRadius: ".675em" }}
     >
       <div className="flex items-center glow">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="glow text-5xl ml-3 py-3 text-white lg:hidden"
+          className="glow text-5xl ml-1 py-1 text-white lg:hidden"
         >
           ≡
         </button>
@@ -52,7 +52,7 @@ const Navbar = () => {
           } lg:flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4`}
         >
           <Link href="/">
-            <button className="glow px-3 py-2 rounded-md text-lg font-medium">
+            <button className="glow px-1 py-2 rounded-md font-medium">
               Home
             </button>
           </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
                 router.push("/signIn");
               }
             }}
-            className="glow px-3 py-2 rounded-md text-lg font-medium"
+            className="glow px-1 py-2 rounded-md font-medium"
           >
             SignIn
           </button>
@@ -76,19 +76,19 @@ const Navbar = () => {
                 router.push("/signUp");
               }
             }}
-            className="glow px-3 py-2 rounded-md text-lg font-medium"
+            className="glow px-1 py-2 rounded-md font-medium"
           >
             SignUp
           </button>
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
-            className="glow px-3 py-2 rounded-md text-lg font-medium"
+            className="glow px-1 py-2 rounded-md font-medium"
           >
             ComicBot
           </button>
           <button
             onClick={() => handleNavigation("/jokes", true)}
-            className="glow px-3 py-2 rounded-md text-lg font-medium"
+            className="glow px-1 py-2 rounded-md font-medium"
           >
             JokePad
           </button>

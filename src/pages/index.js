@@ -52,17 +52,24 @@ export default function Home() {
     <main
       className="flex flex-col"
       style={{
-        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontFamily: "'Comic Sans MS', sans-serif",
         fontWeight: "bold",
+        backgroundColor: "rgb(var(--background-rgb))",
+        color: "rgb(var(--foreground-rgb))",
       }}
     >
+      <Navbar />
       <Head>
         <title>Comedify!</title>
       </Head>
-      <Navbar />
       <div
-        className="text-2xl text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-600 inline-block p-2 shadow-lg mb-5 mt-1 mx-auto"
-        style={{ borderRadius: "3em", boxShadow: "var(--neumorphism-shadow)" }}
+        className="text-2xl inline-block p-2 shadow-lg mb-5 mt-1 mx-auto glow"
+        style={{
+          backgroundColor: "rgba(var(--mustard), 0.8)",
+          borderRadius: "3em",
+          boxShadow: "var(--neumorphism-shadow)",
+          color: "rgb(var(--bright-pastel))",
+        }}
         data-aos="zoom-in"
       >
         Sign In or Sign Up for full access to all this app&apos;s features!
@@ -76,7 +83,11 @@ export default function Home() {
               router.push("/signIn");
             }
           }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4 bg-gray-700 text-white hover:bg-gray-800 transition duration-200"
+          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
+          style={{
+            backgroundColor: `rgba(var(--neon-blue), 0.8)`,
+            color: "rgb(var(--bright-pastel))",
+          }}
         >
           Sign In
         </button>
@@ -88,13 +99,16 @@ export default function Home() {
               router.push("/signUp");
             }
           }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200"
-          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
+          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
+          style={{
+            backgroundColor: `rgba(var(--neon-blue), 0.8)`,
+            color: "rgb(var(--bright-pastel))",
+          }}
         >
           Sign Up
         </button>
       </div>
-      <h1 className="text-5xl text-white glow m-10 mx-auto" data-aos="flip-up">
+      <h1 className="text-5xl glow m-10 mx-auto" data-aos="flip-up">
         Comedify!
       </h1>
       <Image
@@ -119,7 +133,7 @@ export default function Home() {
           </button>
 
           <div className="flex flex-row flex-wrap sm:flex-nowrap">
-            <div className="flex-1 mr-0 sm:mr-2">
+            <div className="flex-1 mr-0 sm:mr-2 glow">
               <p>
                 Your personal comedy bit creation assistant fine-tuned from a
                 llm on comedy scripts. Utilizing cutting-edge GPT technology,
@@ -172,7 +186,7 @@ export default function Home() {
                 />
               </button>
             </div>
-            <div className="flex-1 ml-0 sm:ml-2">
+            <div className="flex-1 ml-0 sm:ml-2 glow">
               <p>
                 With Comedify, you can unleash your comedy genius by writing and
                 working on jokes and bits. Our platform provides a creative

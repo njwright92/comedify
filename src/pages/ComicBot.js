@@ -162,18 +162,27 @@ const ComicBot = () => {
     <main
       className="flex flex-col p-3"
       style={{
-        fontFamily: "'Comic Sans MS', cursive, sans-serif",
+        fontFamily: "'Comic Sans MS', sans-serif",
         backgroundColor: "rgb(var(--background-rgb))",
         fontWeight: "bold",
       }}
     >
       <Navbar />
       <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
-      <div className="w-full mx-auto m-2 mt-5 bg-gray-800 p-8 shadow-md rounded-md relative">
+      <div
+        className="w-full mx-auto m-2 mt-5 bg-deep-red p-8 shadow-md rounded-md relative"
+        style={{
+          backgroundColor: `rgba(var(--deep-red), 0.2)`,
+          boxShadow: "var(--neumorphism-shadow)",
+        }}
+      >
         <button
           onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium bg-magenta-500 text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
-          style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
+          className="glow px-2 py-1 rounded-md text-sm font-medium text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
+          style={{
+            backgroundColor: `rgba(var(--mustard), 0.8)`,
+            color: "rgb(var(--deep-red))",
+          }}
         >
           Sign Out
         </button>
@@ -183,15 +192,15 @@ const ComicBot = () => {
             value={userInput}
             onChange={handleInputChange}
             className="p-2 border border-gray-700 rounded text-white bg-gray-700 resize-y"
-            placeholder="ask me anything.."
-            rows="2"
+            placeholder="Write your bit..."
+            rows="4"
             disabled={isLoading}
           />
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="bg-magenta-500 hover:bg-magenta-600 text-white px-5 py-2 rounded mt-4 glow"
-            style={{ backgroundColor: `rgba(var(--accent-color), 0.8)` }}
+            className="bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded mt-4 glow"
+            style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
           >
             Send
           </button>

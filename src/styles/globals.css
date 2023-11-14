@@ -4,9 +4,12 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-rgb: 15, 15, 20;
-  --accent-color: 214, 31, 98;
-  --neumorphism-shadow: 8px 8px 16px #0a0a0f, -8px -8px 16px #1f1f2b;
+  --background-rgb: 28, 10, 20;
+  --deep-red: 139, 0, 0;
+  --mustard: 205, 179, 128;
+  --bright-pastel: 255, 182, 193;
+  --neon-blue: 77, 182, 255;
+  --neumorphism-shadow: 8px 8px 16px #170a13, -8px -8px 16px #3b1427;
 }
 
 .button-container {
@@ -15,7 +18,8 @@
   gap: 1em;
   padding: 1em;
   margin-top: 1em;
-  background-color: rgba(var(--background-rgb), 0.6);
+  background-color: rgba(var(--mustard), 0.8);
+  color: rgb(var(--deep-red));
   border-radius: 0.625em;
   box-shadow: var(--neumorphism-shadow);
 }
@@ -45,30 +49,28 @@
 }
 
 body {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Comic Sans MS", sans-serif;
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-rgb));
 }
 
 * {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Comic Sans MS", sans-serif;
   font-weight: bold;
   border-radius: 0.625em;
 }
 
 .glow {
-  text-shadow: 0 0 0.625em rgb(var(--accent-color)),
-    0 0 1.25em rgb(var(--accent-color)), 0 0 2.1875em rgb(var(--accent-color)),
-    0 0 2.5em rgb(var(--accent-color)), 0 0 3.125em rgb(var(--accent-color)),
-    0 0 4.6875em rgb(var(--accent-color));
+  text-shadow: 0 0 0.625em rgb(var(--bright-pastel)),
+    0 0 1.25em rgb(var(--neon-blue));
 }
 
 .comicBotCard,
 .jokeLibraryCard {
   padding: 1em;
   margin: 1em;
-  background-color: rgba(var(--accent-color), 0.2);
+  background-color: rgba(var(--deep-red), 0.2);
   border-radius: 0.625em;
   box-shadow: var(--neumorphism-shadow);
   display: flex;
@@ -82,6 +84,7 @@ body {
   border-radius: 0.625em;
   padding: 1rem;
   background-color: rgba(var(--background-rgb), 0.8);
+  color: rgb(var(--bright-pastel));
   box-shadow: var(--neumorphism-shadow);
 }
 

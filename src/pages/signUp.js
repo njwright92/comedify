@@ -57,9 +57,11 @@ const SignUp = () => {
   };
 
   return (
-    <main className="bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen p-8">
+    <main className="bg-gradient-to-b from-deep-red to-mustard min-h-screen p-8">
       <Navbar />
-      <h1 className="text-4xl text-white text-center mb-10 glow">Sign Up</h1>
+      <h1 className="text-4xl text-bright-pastel text-center mb-10 glow">
+        Sign Up
+      </h1>
       <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-gray-800 p-8 shadow-md rounded-md text-white">
         <form
           onSubmit={(e) => {
