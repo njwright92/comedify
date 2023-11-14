@@ -29,7 +29,7 @@ const ComicBot = () => {
   const askComicbot = async (prompt) => {
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta",
+        "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-alpha",
         {
           method: "POST",
           headers: {
@@ -75,7 +75,7 @@ const ComicBot = () => {
         messages: doc.data().messages,
       }));
 
-      setAllConversations(fetchedConvos);
+      setAllConversations(fetchedConvos.reverse());
     };
 
     if (userUID) {
@@ -207,27 +207,28 @@ const ComicBot = () => {
           {isLoading && <div className="loading-indicator">Loading...</div>}
         </div>
         <div className="w-full mx-auto conversation-container">
-          {conversation.map((message, index) => (
-            <div
-              key={index}
-              className={
-                message.from === "bot"
-                  ? "bot-message-container"
-                  : "user-message-container"
-              }
-            >
-              <span className="text-white m-2">
-                {message.from === "bot" ? "ComicBot:.." : "...You"}
-              </span>
-              <p
+          {conversation &&
+            conversation.map((message, index) => (
+              <div
+                key={index}
                 className={
-                  message.from === "bot" ? "bot-message" : "user-message"
+                  message.from === "bot"
+                    ? "bot-message-container"
+                    : "user-message-container"
                 }
               >
-                {message.text}
-              </p>
-            </div>
-          ))}
+                <span className="text-white m-2">
+                  {message.from === "bot" ? "ComicBot:.." : "...You"}
+                </span>
+                <p
+                  className={
+                    message.from === "bot" ? "bot-message" : "user-message"
+                  }
+                >
+                  {message.text}
+                </p>
+              </div>
+            ))}
           {isLoading && (
             <div className="bot-message-container">
               <span className="text-white m-2">ComicBot:..</span>
@@ -247,34 +248,35 @@ const ComicBot = () => {
           <h2 className="text-2xl text-white text-center mb-4">
             Previous Conversations
           </h2>
-          {allConversations.map((convo, index) => (
+          {allConversations.reverse().map((convo, index) => (
             <div
               key={index}
               className={`${
                 index % 2 === 0 ? "bg-gray-300" : "bg-white"
               } conversation-container`}
             >
-              {convo.messages.map((message, i) => (
-                <div
-                  key={i}
-                  className={
-                    message.from === "bot"
-                      ? "bot-message-container"
-                      : "user-message-container"
-                  }
-                >
-                  <span className="text-white m-2">
-                    {message.from === "bot" ? "ComicBot:.." : "...You"}
-                  </span>
-                  <p
+              {Array.isArray(convo.messages) &&
+                convo.messages.map((message, i) => (
+                  <div
+                    key={i}
                     className={
-                      message.from === "bot" ? "bot-message" : "user-message"
+                      message.from === "bot"
+                        ? "bot-message-container"
+                        : "user-message-container"
                     }
                   >
-                    {message.text}
-                  </p>
-                </div>
-              ))}
+                    <span className="text-white m-2">
+                      {message.from === "bot" ? "ComicBot:.." : "...You"}
+                    </span>
+                    <p
+                      className={
+                        message.from === "bot" ? "bot-message" : "user-message"
+                      }
+                    >
+                      {message.text}
+                    </p>
+                  </div>
+                ))}
               <button
                 className="bg-red-500 text-white px-2 py-1 rounded"
                 onClick={() => deleteConversation(convo.id)}
