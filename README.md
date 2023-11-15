@@ -1,67 +1,58 @@
 # Comedify
 
-Comedify is a [Next.js](https://nextjs.org/) application equipped with a conversational AI chatbot named ComicBot and a jokes/bits library. The app is perfect for those in comedy who want to test out their bits or simply have a humorous conversation with a chatbot. This project is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and connected to a Firebase Firestore database.
+Comedify is a creative and interactive Next.js application, featuring ComicBot, an AI-driven conversational chatbot tailored for humor and entertainment. Ideal for comedy enthusiasts and professionals alike, Comedify provides a platform to test out jokes or engage in witty banter with a chatbot. This project, leveraging the robust capabilities of create-next-app, integrates seamlessly with a Firebase Firestore database for dynamic content management.
 
 ## Features
 
-- **ComicBot**: An AI conversational chatbot for humor and entertainment.
-- **Jokes & Bits Library**: A collection of jokes and comedic bits that you can add to or read from.
+- ComicBot: An AI-powered chatbot designed for delivering and receiving humor. Whether you're a budding comedian or just looking for a laugh, ComicBot is your go-to virtual humor partner.
+
+- Jokes & Bits Library: A comprehensive repository where users can contribute, access, and enjoy a wide array of jokes and comedic bits.
 
 ## Getting Started
+
+To get your local version of Comedify up and running, follow these steps:
 
 ### Prerequisites
 
 - Node.js
 - Firebase account
 
-### Installation
+### Installation Guide
 
-1. Clone the repository
-    ```bash
-    git clone https://github.com/njwright92/comedify.git
-    ```
-2. Navigate to the project directory
-    ```bash
-    cd comedify
-    ```
-3. Install dependencies
-    ```bash
-    npm install
-    ```
-4. Set up your Firebase Firestore and add your Firebase config to `firebase.js`.
+Clone the repository:
 
-### Running the App
+- git clone https://github.com/njwright92/comedify.git
 
-Start the development server:
+Enter the project directory:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- cd comedify
 
-Open http://localhost:3000 with your browser to see the result.
+Install the necessary dependencies:
 
-Additionally, you'll need to launch a separate terminal instance and execute the command node server/server.js. 
-This step initiates communication with ComicBot, enabling the retrieval of responses.
+- npm install
 
-How to Use
-ComicBot: Navigate to the ComicBot section to start a conversation with the chatbot.
-Jokes & Bits: Go to the Jokes & Bits section to add or view jokes.
-API
-ComicBot communicates with a backend API hosted on Hugging Face.
-Jokes & Bits Library utilizes Firebase Firestore for storage.
-Technologies
-Next.js
-React
-Node.js
-Firebase Firestore
-Axios
-Express
-Deploy
-For deployment, you can use platforms like Vercel.
+Configure Firebase Firestore and update firebase.js with your Firebase configuration details.
 
-For more details, check Next.js deployment documentation.
+### How to Run
 
-bash
+Launch the development server:
+
+- npm run dev
+
+## Usage Instructions
+
+ComicBot: Visit the ComicBot section on the app to start an engaging conversation with the AI chatbot.
+
+Jokes & Bits: Use this section to add new material or browse through the existing collection of jokes and bits.
+
+## Technology Stack
+
+Frontend: React, Next.js
+Backend: Node.js, Firebase Firestore for data storage
+Styling: Tailwind CSS, AOS for animations
+Linting: ESLint
+Version Control: Git
+
+## deployment
+
+Comedify is deployable on platforms like Vercel. For more details on deploying Next.js applications, refer to the Next.js deployment documentation.
