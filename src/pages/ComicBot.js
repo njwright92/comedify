@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../../firebase";
 import {
   addDoc,
@@ -15,7 +14,6 @@ import {
 import Footer from "@/components/footer";
 
 const ComicBot = () => {
-  const router = useRouter();
   const [allConversations, setAllConversations] = useState([]);
   const [conversation, setConversation] = useState([]);
   const [userInput, setUserInput] = useState("");
@@ -84,21 +82,26 @@ const ComicBot = () => {
   }, [userUID]);
 
   const saveConversation = async () => {
-    const userUID = auth.currentUser ? auth.currentUser.uid : null;
-    if (userUID) {
-      try {
+    try {
+      const userUID = auth.currentUser?.uid;
+      if (userUID) {
         const convoCollection = collection(db, "conversations");
-        await addDoc(convoCollection, {
+        const docRef = await addDoc(convoCollection, {
           uid: userUID,
           messages: conversation,
         });
-        setAllConversations([...allConversations, conversation]);
-        setConversation([]);
-      } catch (error) {
-        console.error("Error saving conversation: ", error);
+        setAllConversations((prevConvos) => [
+          {
+            id: docRef.id,
+            messages: conversation,
+          },
+          ...prevConvos,
+        ]);
       }
+      setConversation([]);
+    } catch (error) {
+      console.error("Error saving conversation: ", error);
     }
-    setConversation([]);
   };
 
   const deleteConversation = async (docID) => {
@@ -148,16 +151,6 @@ const ComicBot = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      alert("Successfully signed out.");
-      router.push("/");
-    } catch (error) {
-      alert(`An error occurred: ${error.message}`);
-    }
-  };
-
   return (
     <main
       className="flex flex-col p-3"
@@ -168,7 +161,7 @@ const ComicBot = () => {
       }}
     >
       <Navbar />
-      <h1 className="text-4xl text-white text-center mb-10 glow">ComicBot!</h1>
+      <h1 className="text-5xl text-white text-center mb-10 glow">ComicBot!</h1>
       <div
         className="w-full mx-auto m-2 mt-5 bg-deep-red p-8 shadow-md rounded-md relative"
         style={{
@@ -176,23 +169,13 @@ const ComicBot = () => {
           boxShadow: "var(--neumorphism-shadow)",
         }}
       >
-        <button
-          onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
-          style={{
-            backgroundColor: `rgba(var(--mustard), 0.8)`,
-            color: "rgb(var(--deep-red))",
-          }}
-        >
-          Sign Out
-        </button>
         <div className="input-area flex flex-col items-center">
           <textarea
             name="userInput"
             value={userInput}
             onChange={handleInputChange}
             className="p-2 border border-black rounded resize-y"
-            placeholder="Write your bit..."
+            placeholder="Write a funny take on everyday life, like 'Why is pizza round, but comes in a square box?' or 'If animals could talk, what would a cat say about Mondays?'"
             rows="4"
             disabled={isLoading}
           />
@@ -217,7 +200,7 @@ const ComicBot = () => {
                     : "user-message-container"
                 }
               >
-                <span className="text-white m-2">
+                <span>
                   {message.from === "bot" ? "ComicBot:.." : "...You"}
                 </span>
                 <p

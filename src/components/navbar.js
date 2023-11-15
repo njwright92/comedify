@@ -56,30 +56,23 @@ const Navbar = () => {
               Home
             </button>
           </Link>
-          <button
-            onClick={() => {
-              if (isAuthenticated) {
-                handleAlert("You're already signed in.");
-              } else {
-                router.push("/signIn");
-              }
-            }}
-            className="glow px-1 py-2 rounded-md font-medium"
-          >
-            SignIn
-          </button>
-          <button
-            onClick={() => {
-              if (isAuthenticated) {
-                handleAlert("You're already signed up.");
-              } else {
-                router.push("/signUp");
-              }
-            }}
-            className="glow px-1 py-2 rounded-md font-medium"
-          >
-            SignUp
-          </button>
+          {!isAuthenticated && (
+            <>
+              <button
+                onClick={() => router.push("/signIn")}
+                className="glow px-1 py-2 rounded-md font-medium"
+              >
+                SignIn
+              </button>
+              <button
+                onClick={() => router.push("/signUp")}
+                className="glow px-1 py-2 rounded-md font-medium"
+              >
+                SignUp
+              </button>
+            </>
+          )}
+
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
             className="glow px-1 py-2 rounded-md font-medium"

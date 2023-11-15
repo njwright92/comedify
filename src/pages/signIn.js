@@ -48,12 +48,12 @@ const SignIn = () => {
   };
 
   return (
-    <main className="bg-gradient-to-b from-deep-red to-mustard min-h-screen p-8">
+    <main className="bg-deep-red min-h-screen p-8">
       <Navbar />
       <h1 className="text-4xl text-bright-pastel text-center mb-10 glow">
         Sign In
       </h1>
-      <div className="max-w-md mx-auto bg-gradient-to-b from-transparent to-gray-800 p-8 shadow-md rounded-md text-white">
+      <div className="max-w-md mx-auto bg-gray-600 p-8 shadow-md rounded-md text-white">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -67,7 +67,6 @@ const SignIn = () => {
             <input
               type="email"
               id="email"
-              name="email"
               autoComplete="current-email"
               className="p-2 w-full border border-gray-700 rounded text-white bg-gray-700"
               required
@@ -83,7 +82,6 @@ const SignIn = () => {
             <input
               type="password"
               id="password"
-              name="password"
               autoComplete="current-password"
               className="p-2 w-full border border-gray-700 rounded text-white bg-gray-700"
               required

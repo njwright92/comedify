@@ -63,7 +63,7 @@ export default function Home() {
         <title>Comedify!</title>
       </Head>
       <div
-        className="text-2xl inline-block p-2 shadow-lg mb-5 mt-1 mx-auto glow"
+        className="text-xl inline-block p-2 shadow-lg mb-5 mt-1 mx-auto glow"
         style={{
           backgroundColor: "rgba(var(--mustard), 0.8)",
           borderRadius: "3em",
@@ -72,42 +72,37 @@ export default function Home() {
         }}
         data-aos="zoom-in"
       >
-        Sign In or Sign Up for full access to all this app&apos;s features!
+        {isAuthenticated
+          ? "Welcome to Comedify! Write a joke!"
+          : "Sign In or Sign Up for full access to all this app's features!"}
       </div>
       <div className="flex justify-center mt-4">
-        <button
-          onClick={() => {
-            if (isAuthenticated) {
-              handleAlert("You're already signed in.");
-            } else {
-              router.push("/signIn");
-            }
-          }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
-          style={{
-            backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-            color: "white",
-          }}
-        >
-          Sign In
-        </button>
-        <button
-          onClick={() => {
-            if (isAuthenticated) {
-              handleAlert("You're already signed up.");
-            } else {
-              router.push("/signUp");
-            }
-          }}
-          className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
-          style={{
-            backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-            color: "white",
-          }}
-        >
-          Sign Up
-        </button>
+        {!isAuthenticated && (
+          <>
+            <button
+              onClick={() => router.push("/signIn")}
+              className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
+              style={{
+                backgroundColor: `rgba(var(--neon-blue), 0.8)`,
+                color: "white",
+              }}
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => router.push("/signUp")}
+              className="glow px-6 py-3 rounded-md text-lg font-medium"
+              style={{
+                backgroundColor: `rgba(var(--neon-blue), 0.8)`,
+                color: "white",
+              }}
+            >
+              Sign Up
+            </button>
+          </>
+        )}
       </div>
+
       <h1 className="text-5xl glow m-10 mx-auto" data-aos="flip-up">
         Comedify!
       </h1>
@@ -122,12 +117,12 @@ export default function Home() {
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div
-          className="comicBotCard text-white m-1 flex flex-col"
+          className="comicBotCard glow text-white m-1 flex flex-col"
           data-aos="fade-left"
         >
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
-            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
           >
             ComicBot
           </button>
@@ -145,7 +140,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/ComicBot", true)}
-                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+                className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
               >
                 <Image
                   className="self-end mb-1"
@@ -160,12 +155,12 @@ export default function Home() {
           </div>
         </div>
         <div
-          className="jokeLibraryCard text-white m-1 flex flex-col"
+          className="jokeLibraryCard glow text-white m-1 flex flex-col"
           data-aos="fade-right"
         >
           <button
             onClick={() => handleNavigation("/jokes", true)}
-            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
           >
             JokePad
           </button>
@@ -174,7 +169,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/jokes", true)}
-                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+                className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
               >
                 <Image
                   className="self-end mb-1"

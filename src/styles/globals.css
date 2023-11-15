@@ -32,7 +32,7 @@
   color: black;
   resize: vertical;
   width: 100%;
-  background-color: rgba(var(--light-gray), 0.8);
+  background-color: rgba(var(--foreground-rgb), 0.8);
   box-shadow: var(--neumorphism-shadow);
 }
 
@@ -68,7 +68,7 @@ body {
 }
 
 .glow {
-  text-shadow: 0 0 0.75em rgb(var(--neon-blue)), 0 0 2em rgb(var(--neon-blue));
+  text-shadow: 0 0 0.6em rgb(var(--neon-blue)), 0 0 1.7em rgb(var(--neon-blue));
 }
 
 .comicBotCard,
@@ -76,7 +76,7 @@ body {
   padding: 1em;
   margin: 1em;
   background-color: rgba(var(--deep-red), 0.2);
-  color: rgb(var(--neon-blue));
+  color: rgb(var(--foreground-rgb));
   border-radius: 0.625em;
   box-shadow: var(--neumorphism-shadow);
   display: flex;
@@ -90,7 +90,7 @@ body {
   border-radius: 0.625em;
   padding: 1rem;
   background-color: rgba(var(--background-rgb), 0.8);
-  color: rgb(var(--neon-blue));
+  color: rgb(var(--foreground-rgb));
   box-shadow: var(--neumorphism-shadow);
 }
 
@@ -102,10 +102,20 @@ body {
   margin-bottom: 1em;
 }
 
-.bot-message-container span,
+.bot-message-container span {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 0.625em rgb(var(--bright-pastel)),
+    0 0 1.25em rgb(var(--bright-pastel));
+  text-decoration: underline;
+}
+
 .user-message-container span {
   font-weight: bold;
   margin-bottom: 0.5em;
+  text-shadow: 0 0 0.625em rgb(var(--neon-blue)),
+    0 0 1.25em rgb(var(--neon-blue));
+  text-decoration: underline;
 }
 
 .bot-message,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../../firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   doc,
   query,
@@ -11,13 +11,11 @@ import {
   deleteDoc,
   onSnapshot,
 } from "firebase/firestore";
-import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import "font-awesome/css/font-awesome.min.css";
 import Footer from "@/components/footer";
 
 const Jokes = () => {
-  const router = useRouter();
   const [jokes, setJokes] = useState([]);
   const [newJoke, setNewJoke] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
@@ -113,16 +111,6 @@ const Jokes = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      alert("Successfully signed out.");
-      router.push("/");
-    } catch (error) {
-      alert(`An error occurred: ${error.message}`);
-    }
-  };
-
   return (
     <main
       className="flex flex-col p-3"
@@ -134,7 +122,7 @@ const Jokes = () => {
       }}
     >
       <Navbar />
-      <h1 className="text-4xl text-white text-center mb-10 glow">JokePad!</h1>
+      <h1 className="text-5xl text-white text-center mb-10 glow">JokePad!</h1>
       <div
         className="w-full mx-auto shadow-md rounded-md text-white relative"
         style={{
@@ -142,16 +130,6 @@ const Jokes = () => {
           boxShadow: "var(--neumorphism-shadow)",
         }}
       >
-        <button
-          onClick={handleSignOut}
-          className="glow px-2 py-1 rounded-md text-sm font-medium text-white hover:bg-magenta-600 transition duration-200 absolute top-4 right-4"
-          style={{
-            backgroundColor: `rgba(var(--mustard), 0.8)`,
-            color: "rgb(var(--deep-red))",
-          }}
-        >
-          Sign Out
-        </button>
         <form onSubmit={handleSubmit}>
           <div className="input-area mt-5 flex flex-col items-center">
             <label htmlFor="joke" className="block text-sm font-semibold mb-2">

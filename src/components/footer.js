@@ -1,10 +1,25 @@
+import { useRouter } from "next/router";
+import { signOut, getAuth } from "firebase/auth";
+
 const Footer = () => {
+  const router = useRouter();
+  const auth = getAuth();
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      alert("Successfully signed out.");
+      router.push("/");
+    } catch (error) {
+      alert(`An error occurred: ${error.message}`);
+    }
+  };
+
   return (
     <footer className="bg-black text-white py-4 mt-10">
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto text-center glow">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="hover:underline text-magenta-500 glow mb-4"
+          className="hover:underline glow mb-4 mr-6"
           style={{
             backgroundColor: `rgba(var(--accent-color), 0.2)`,
             padding: "0.5em 1em",
@@ -13,6 +28,15 @@ const Footer = () => {
           }}
         >
           Back to Top ↑
+        </button>
+        <button
+          onClick={handleSignOut}
+          className="hover:underline glow px-1 py-1 rounded-md text-sm font-small text-white absolute"
+          style={{
+            backgroundColor: `rgba(var(--deep-red), 0.8)`,
+          }}
+        >
+          Sign Out
         </button>
         <p className="text-sm" style={{ fontWeight: "bold" }}>
           &copy; {new Date().getFullYear()} Comedify. All rights reserved.
