@@ -112,7 +112,7 @@ export default function Home() {
         alt="Comic Logo"
         width={350}
         height="auto"
-        priority
+        load="eager"
         data-aos="flip-up"
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
@@ -148,7 +148,7 @@ export default function Home() {
                   alt="comicbot"
                   width="auto"
                   height="350"
-                  priority
+                  load="lazy"
                 />
               </button>
             </div>
@@ -177,7 +177,7 @@ export default function Home() {
                   alt="Jokes"
                   width="350"
                   height="auto"
-                  priority
+                  load="lazy"
                 />
               </button>
             </div>
