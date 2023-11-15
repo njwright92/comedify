@@ -2,6 +2,8 @@
 
 Comedify is a creative and interactive Next.js application, featuring ComicBot, an AI-driven conversational chatbot tailored for humor and entertainment. Ideal for comedy enthusiasts and professionals alike, Comedify provides a platform to test out jokes or engage in witty banter with a chatbot. This project, leveraging the robust capabilities of create-next-app, integrates seamlessly with a Firebase Firestore database for dynamic content management.
 
+Play with it at "https://comedify-54274.web.app"
+
 ## Features
 
 - ComicBot: An AI-powered chatbot designed for delivering and receiving humor. Whether you're a budding comedian or just looking for a laugh, ComicBot is your go-to virtual humor partner.
