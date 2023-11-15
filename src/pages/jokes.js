@@ -51,7 +51,7 @@ const Jokes = () => {
           id: doc.id,
           joke: doc.data().joke,
         }));
-        setJokes(fetchedJokes);
+        setJokes(fetchedJokes.reverse());
       });
       return () => unsubscribe();
     };
@@ -159,12 +159,11 @@ const Jokes = () => {
             </label>
             <textarea
               id="joke"
-              name="joke"
               type="text"
               value={newJoke}
               onChange={handleInputChange}
               placeholder="Write your bit.."
-              className="rounded text-white bg-gray-700"
+              className="rounded"
               rows="4"
               required
             />
@@ -183,7 +182,7 @@ const Jokes = () => {
           {jokes.map((joke, index) => (
             <div
               key={index}
-              className="joke-item w-full input-area mb-4 bg-white text-black p-4 rounded shadow flex justify-between items-center"
+              className="conversation-container w-full input-area mb-4 p-4 rounded shadow flex justify-between items-center"
             >
               {editingIndex === index ? (
                 <>
@@ -212,7 +211,7 @@ const Jokes = () => {
                 <>
                   <p className="text-lg flex-grow">{joke.joke}</p>
                   <i
-                    className="fa fa-lg fa-pencil text-gray-500 hover:text-gray-800 cursor-pointer"
+                    className="fa fa-lg fa-pencil text-gray-700 hover:text-gray-900 cursor-pointer"
                     aria-hidden="true"
                     onClick={() => handleEditClick(index)}
                   ></i>
