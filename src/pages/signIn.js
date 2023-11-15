@@ -22,7 +22,7 @@ const SignIn = () => {
         { merge: true }
       );
       alert("Successfully signed in with Google!");
-      router.push("/");
+      router.push("ComicBot/");
     } catch (error) {
       alert(`Sign-in failed: ${error.message}`);
     }
@@ -41,7 +41,7 @@ const SignIn = () => {
       });
 
       alert("Successfully signed in!");
-      router.push("/");
+      router.push("ComicBot/");
     } catch (error) {
       alert(`Sign-in failed: ${error.message}`);
     }

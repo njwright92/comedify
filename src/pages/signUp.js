@@ -22,7 +22,7 @@ const SignUp = () => {
         { merge: true }
       );
       alert("Successfully signed in with Google!");
-      router.push("/");
+      router.push("ComicBot/");
     } catch (error) {
       alert(`Sign-in failed: ${error.message}`);
     }
@@ -50,7 +50,7 @@ const SignUp = () => {
       });
 
       alert("Successfully signed up!");
-      router.push("/");
+      router.push("ComicBot/");
     } catch (error) {
       alert(`Sign-up failed: ${error.message}`);
     }
