@@ -191,7 +191,7 @@ const ComicBot = () => {
             name="userInput"
             value={userInput}
             onChange={handleInputChange}
-            className="p-2 border border-gray-700 rounded text-white bg-gray-700 resize-y"
+            className="p-2 border border-black rounded resize-y"
             placeholder="Write your bit..."
             rows="4"
             disabled={isLoading}

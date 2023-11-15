@@ -68,7 +68,7 @@ export default function Home() {
           backgroundColor: "rgba(var(--mustard), 0.8)",
           borderRadius: "3em",
           boxShadow: "var(--neumorphism-shadow)",
-          color: "rgb(var(--bright-pastel))",
+          color: "white",
         }}
         data-aos="zoom-in"
       >
@@ -86,7 +86,7 @@ export default function Home() {
           className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
           style={{
             backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-            color: "rgb(var(--bright-pastel))",
+            color: "white",
           }}
         >
           Sign In
@@ -102,7 +102,7 @@ export default function Home() {
           className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
           style={{
             backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-            color: "rgb(var(--bright-pastel))",
+            color: "white",
           }}
         >
           Sign Up
@@ -127,13 +127,13 @@ export default function Home() {
         >
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
-            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
           >
             ComicBot
           </button>
 
           <div className="flex flex-row flex-wrap sm:flex-nowrap">
-            <div className="flex-1 mr-0 sm:mr-2 glow">
+            <div className="flex-1 mr-0 sm:mr-2">
               <p>
                 Your personal comedy bit creation assistant fine-tuned from a
                 llm on comedy scripts. Utilizing cutting-edge GPT technology,
@@ -145,7 +145,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/ComicBot", true)}
-                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
               >
                 <Image
                   className="self-end mb-1"
@@ -165,7 +165,7 @@ export default function Home() {
         >
           <button
             onClick={() => handleNavigation("/jokes", true)}
-            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+            className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
           >
             JokePad
           </button>
@@ -174,7 +174,7 @@ export default function Home() {
             <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handleNavigation("/jokes", true)}
-                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium hover:bg-gray-700 hover:text-white transition duration-200"
+                className="text-3xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
               >
                 <Image
                   className="self-end mb-1"
@@ -186,7 +186,7 @@ export default function Home() {
                 />
               </button>
             </div>
-            <div className="flex-1 ml-0 sm:ml-2 glow">
+            <div className="flex-1 ml-0 sm:ml-2">
               <p>
                 With Comedify, you can unleash your comedy genius by writing and
                 working on jokes and bits. Our platform provides a creative

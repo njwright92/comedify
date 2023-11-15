@@ -10,6 +10,7 @@
   --bright-pastel: 255, 182, 193;
   --neon-blue: 77, 182, 255;
   --neumorphism-shadow: 8px 8px 16px #170a13, -8px -8px 16px #3b1427;
+  --light-gray: 211, 211, 211;
 }
 
 .button-container {
@@ -18,8 +19,8 @@
   gap: 1em;
   padding: 1em;
   margin-top: 1em;
-  background-color: rgba(var(--mustard), 0.8);
-  color: rgb(var(--deep-red));
+  background-color: rgba(var(--deep-red), 0.8);
+  color: rgb(var(--mustard));
   border-radius: 0.625em;
   box-shadow: var(--neumorphism-shadow);
 }
@@ -28,10 +29,10 @@
   padding: 0.125em;
   border: none;
   border-radius: 0.625em;
-  color: rgb(var(--foreground-rgb));
+  color: black;
   resize: vertical;
   width: 100%;
-  background-color: rgba(var(--background-rgb), 0.8);
+  background-color: rgba(var(--light-gray), 0.8);
   box-shadow: var(--neumorphism-shadow);
 }
 
@@ -43,6 +44,7 @@
     --mustard: 205, 179, 128;
     --bright-pastel: 255, 182, 193;
     --neon-blue: 77, 182, 255;
+    --light-gray: 211, 211, 211;
   }
 }
 
@@ -66,8 +68,7 @@ body {
 }
 
 .glow {
-  text-shadow: 0 0 0.75em rgb(var(--bright-pastel)),
-    0 0 2em rgb(var(--neon-blue));
+  text-shadow: 0 0 0.75em rgb(var(--neon-blue)), 0 0 2em rgb(var(--neon-blue));
 }
 
 .comicBotCard,
@@ -75,6 +76,7 @@ body {
   padding: 1em;
   margin: 1em;
   background-color: rgba(var(--deep-red), 0.2);
+  color: rgb(var(--neon-blue));
   border-radius: 0.625em;
   box-shadow: var(--neumorphism-shadow);
   display: flex;
@@ -88,7 +90,7 @@ body {
   border-radius: 0.625em;
   padding: 1rem;
   background-color: rgba(var(--background-rgb), 0.8);
-  color: rgb(var(--bright-pastel));
+  color: rgb(var(--neon-blue));
   box-shadow: var(--neumorphism-shadow);
 }
 
