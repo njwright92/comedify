@@ -73,8 +73,8 @@ body {
 
 .comicBotCard,
 .jokeLibraryCard {
-  padding: 1em;
-  margin: 1em;
+  padding: .7em;
+  margin: .5em;
   background-color: rgba(var(--deep-red), 0.2);
   color: rgb(var(--foreground-rgb));
   border-radius: 0.625em;
@@ -88,7 +88,7 @@ body {
   margin-bottom: 2rem;
   border: none;
   border-radius: 0.625em;
-  padding: 1rem;
+  padding: .5rem;
   background-color: rgba(var(--background-rgb), 0.8);
   color: rgb(var(--foreground-rgb));
   box-shadow: var(--neumorphism-shadow);

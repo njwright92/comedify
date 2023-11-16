@@ -156,11 +156,11 @@ const Jokes = () => {
             </button>
           </div>
         </form>
-        <div className="jokes-list mt-8 p-3 mx-auto">
+        <div className="jokes-list mt-8 p-1 mx-auto">
           {jokes.map((joke, index) => (
             <div
               key={index}
-              className="conversation-container w-full input-area mb-4 p-4 rounded shadow flex justify-between items-center"
+              className="conversation-container w-full input-area mb-4 p-2 rounded shadow flex justify-between items-center"
             >
               {editingIndex === index ? (
                 <>

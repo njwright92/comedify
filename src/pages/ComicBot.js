@@ -175,7 +175,7 @@ const ComicBot = () => {
             value={userInput}
             onChange={handleInputChange}
             className="p-2 border border-black rounded resize-y"
-            placeholder="Write a funny take on everyday life, like 'Why is pizza round, but comes in a square box?' or 'If animals could talk, what would a cat say about Mondays?'"
+            placeholder="Write a funny take on everyday life, like 'Why is pizza round, but comes in a square box?'"
             rows="4"
             disabled={isLoading}
           />
@@ -189,7 +189,7 @@ const ComicBot = () => {
           </button>
           {isLoading && <div className="loading-indicator">Loading...</div>}
         </div>
-        <div className="w-full mx-auto conversation-container">
+        <div className="conversation-container w-full input-area mb-4 p-2 rounded shadow flex justify-between items-center">
           {conversation &&
             conversation.map((message, index) => (
               <div
@@ -200,9 +200,7 @@ const ComicBot = () => {
                     : "user-message-container"
                 }
               >
-                <span>
-                  {message.from === "bot" ? "ComicBot:.." : "...You"}
-                </span>
+                <span>{message.from === "bot" ? "ComicBot:.." : "...You"}</span>
                 <p
                   className={
                     message.from === "bot" ? "bot-message" : "user-message"
@@ -221,7 +219,7 @@ const ComicBot = () => {
         </div>
         <button
           onClick={saveConversation}
-          className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded mt-4"
+          className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded mt-4"
           disabled={isSaved}
         >
           {isSaved ? "Conversation Saved" : "Save Conversation"}
