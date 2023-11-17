@@ -117,11 +117,3 @@ body {
     0 0 1.25em rgb(var(--neon-blue));
   text-decoration: underline;
 }
-
-.bot-message,
-.user-message {
-  background-color: rgba(var(--background-rgb), 0.8);
-  padding: 0.5em;
-  border-radius: 0.25em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
