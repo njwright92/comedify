@@ -73,8 +73,8 @@ body {
 
 .comicBotCard,
 .jokeLibraryCard {
-  padding: .7em;
-  margin: .5em;
+  padding: 0.7em;
+  margin: 0.5em;
   background-color: rgba(var(--deep-red), 0.2);
   color: rgb(var(--foreground-rgb));
   border-radius: 0.625em;
@@ -88,7 +88,7 @@ body {
   margin-bottom: 2rem;
   border: none;
   border-radius: 0.625em;
-  padding: .5rem;
+  padding: 0.5rem;
   background-color: rgba(var(--background-rgb), 0.8);
   color: rgb(var(--foreground-rgb));
   box-shadow: var(--neumorphism-shadow);
@@ -116,4 +116,12 @@ body {
   text-shadow: 0 0 0.625em rgb(var(--neon-blue)),
     0 0 1.25em rgb(var(--neon-blue));
   text-decoration: underline;
+}
+
+.bot-message,
+.user-message {
+  background-color: rgba(var(--background-rgb), 0.8);
+  padding: 0.5em;
+  border-radius: 0.25em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

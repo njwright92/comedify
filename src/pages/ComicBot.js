@@ -189,7 +189,7 @@ const ComicBot = () => {
           </button>
           {isLoading && <div className="loading-indicator">Loading...</div>}
         </div>
-        <div className="conversation-container w-full input-area mb-4 p-2 rounded shadow flex justify-between items-center">
+        <div className="w-full mx-auto conversation-container">
           {conversation &&
             conversation.map((message, index) => (
               <div
