@@ -165,8 +165,8 @@ const ComicBot = () => {
       >
         <Image
           src={dallEbg2}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={100}
           alt="dallE background"
         />

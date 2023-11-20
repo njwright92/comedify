@@ -56,24 +56,23 @@ export default function Home() {
           position: "absolute",
           width: "100%",
           height: "100%",
-          zIndex: -1, // Make sure this sits behind all other content
+          zIndex: -1,
         }}
       >
         <Image
           src={dallEbg}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={100}
           alt="dallE background"
         />
       </div>
       <main
-        className="flex flex-col relative" // Add relative here to position children above the background
+        className="flex flex-col relative"
         style={{
           fontFamily: "'Comic Sans MS', sans-serif",
           fontWeight: "bold",
           color: "rgb(var(--foreground-rgb))",
-          // Remove background styles that are now handled by the Image component
         }}
       >
         <Navbar />
@@ -134,7 +133,7 @@ export default function Home() {
           alt="Comic Logo"
           width={350}
           height="auto"
-          load="eager"
+          
           data-aos="flip-up"
         />
         <div className="flex flex-col gap-4 p-1 mt-10">
@@ -171,7 +170,7 @@ export default function Home() {
                     alt="comicbot"
                     width="auto"
                     height="350"
-                    load="lazy"
+                    
                   />
                 </button>
               </div>
@@ -200,7 +199,7 @@ export default function Home() {
                     alt="Jokes"
                     width="350"
                     height="auto"
-                    load="lazy"
+                    
                   />
                 </button>
               </div>

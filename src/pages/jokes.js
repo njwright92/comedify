@@ -125,8 +125,8 @@ const Jokes = () => {
       >
         <Image
           src={dallEbg3}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={100}
           alt="dallE background"
         />
