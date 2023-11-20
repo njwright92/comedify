@@ -14,6 +14,8 @@ import {
 import Navbar from "../components/navbar";
 import "font-awesome/css/font-awesome.min.css";
 import Footer from "@/components/footer";
+import dallEbg3 from "../Img/dallEbg3.png";
+import Image from "next/image";
 
 const Jokes = () => {
   const [jokes, setJokes] = useState([]);
@@ -112,100 +114,121 @@ const Jokes = () => {
   };
 
   return (
-    <main
-      className="flex flex-col p-3"
-      style={{
-        fontFamily: "'Comic Sans MS', sans-serif",
-        fontWeight: "bold",
-        backgroundColor: "rgb(var(--background-rgb))",
-        color: "rgb(var(--foreground-rgb))",
-      }}
-    >
-      <Navbar />
-      <h1 className="text-5xl text-white text-center mb-10 glow">JokePad!</h1>
+    <>
       <div
-        className="w-full mx-auto shadow-md rounded-md text-white relative"
         style={{
-          backgroundColor: "rgba(var(--deep-red), 0.2)",
-          boxShadow: "var(--neumorphism-shadow)",
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          zIndex: -1, // Make sure this sits behind all other content
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <div className="input-area mt-5 flex flex-col items-center">
-            <label htmlFor="joke" className="block text-sm font-semibold mb-2">
-              Write Your Joke/Bit:
-            </label>
-            <textarea
-              id="joke"
-              type="text"
-              value={newJoke}
-              onChange={handleInputChange}
-              placeholder="Write your bit.."
-              className="rounded"
-              rows="4"
-              required
-            />
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              className="mt-5 bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded glow"
-              style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
-            >
-              Add Joke
-            </button>
-          </div>
-        </form>
-        <div className="jokes-list mt-8 p-1 mx-auto">
-          {jokes.map((joke, index) => (
-            <div
-              key={index}
-              className="conversation-container w-full input-area mb-4 p-2 rounded shadow flex justify-between items-center"
-            >
-              {editingIndex === index ? (
-                <>
-                  <textarea
-                    type="text"
-                    value={joke.joke}
-                    onChange={(e) => handleEditChange(e, index)}
-                    rows="4"
-                  />
-                  <div className="button-container flex space-x-2">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded"
-                      onClick={() => handleEditSubmit(index)}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded"
-                      onClick={handleCancelEdit}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <p className="text-lg flex-grow">{joke.joke}</p>
-                  <i
-                    className="fa fa-lg fa-pencil text-gray-700 hover:text-gray-900 cursor-pointer"
-                    aria-hidden="true"
-                    onClick={() => handleEditClick(index)}
-                  ></i>
-                  <i
-                    className="fa fa-lg fa-trash text-red-600 hover:text-gray-800 cursor-pointer ml-3"
-                    aria-hidden="true"
-                    onClick={() => handleDelete(index, joke)}
-                  ></i>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
+        <Image
+          src={dallEbg3}
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          alt="dallE background"
+        />
       </div>
-      <Footer />
-    </main>
+      <main
+        className="flex flex-col relative" // Add relative here to position children above the background
+        style={{
+          fontFamily: "'Comic Sans MS', sans-serif",
+          fontWeight: "bold",
+          color: "rgb(var(--foreground-rgb))",
+          // Remove background styles that are now handled by the Image component
+        }}
+      >
+        <Navbar />
+        <h1 className="text-5xl text-white text-center mb-10 glow">JokePad!</h1>
+        <div
+          className="w-full mx-auto shadow-md rounded-md text-white relative"
+          style={{
+            backgroundColor: "rgba(var(--deep-red), 0.2)",
+            boxShadow: "var(--neumorphism-shadow)",
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <div className="input-area mt-5 flex flex-col items-center">
+              <label
+                htmlFor="joke"
+                className="block text-sm font-semibold mb-2"
+              >
+                Write Your Joke/Bit:
+              </label>
+              <textarea
+                id="joke"
+                type="text"
+                value={newJoke}
+                onChange={handleInputChange}
+                placeholder="Write your bit.."
+                className="rounded"
+                rows="4"
+                required
+              />
+            </div>
+            <div className="text-center">
+              <button
+                type="submit"
+                className="mt-5 bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded glow"
+                style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
+              >
+                Add Joke
+              </button>
+            </div>
+          </form>
+          <div className="jokes-list mt-8 p-1 mx-auto">
+            {jokes.map((joke, index) => (
+              <div
+                key={index}
+                className="conversation-container w-full input-area mb-4 p-2 rounded shadow flex justify-between items-center"
+              >
+                {editingIndex === index ? (
+                  <>
+                    <textarea
+                      type="text"
+                      value={joke.joke}
+                      onChange={(e) => handleEditChange(e, index)}
+                      rows="4"
+                    />
+                    <div className="button-container flex space-x-2">
+                      <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded"
+                        onClick={() => handleEditSubmit(index)}
+                      >
+                        Save
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded"
+                        onClick={handleCancelEdit}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-lg flex-grow">{joke.joke}</p>
+                    <i
+                      className="fa fa-lg fa-pencil text-gray-700 hover:text-gray-900 cursor-pointer"
+                      aria-hidden="true"
+                      onClick={() => handleEditClick(index)}
+                    ></i>
+                    <i
+                      className="fa fa-lg fa-trash text-red-600 hover:text-gray-800 cursor-pointer ml-3"
+                      aria-hidden="true"
+                      onClick={() => handleDelete(index, joke)}
+                    ></i>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <Footer />
+      </main>
+    </>
   );
 };
 

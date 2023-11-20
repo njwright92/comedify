@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="text-white mt-5 sticky top-5 px-3"
+      className="text-white mt-5 sticky top-5 px-3 bg-black bg-opacity-50"
       style={{ borderRadius: ".675em" }}
     >
       <div className="flex items-center glow">

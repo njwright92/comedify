@@ -12,6 +12,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import Footer from "@/components/footer";
+import dallEbg2 from "../Img/dallEbg2.png";
+import Image from "next/image";
 
 const ComicBot = () => {
   const [allConversations, setAllConversations] = useState([]);
@@ -152,124 +154,149 @@ const ComicBot = () => {
   };
 
   return (
-    <main
-      className="flex flex-col p-3"
-      style={{
-        fontFamily: "'Comic Sans MS', sans-serif",
-        backgroundColor: "rgb(var(--background-rgb))",
-        fontWeight: "bold",
-      }}
-    >
-      <Navbar />
-      <h1 className="text-5xl text-white text-center mb-10 glow">ComicBot!</h1>
+    <>
       <div
-        className="w-full mx-auto m-2 mt-5 bg-deep-red p-8 shadow-md rounded-md relative"
         style={{
-          backgroundColor: `rgba(var(--deep-red), 0.2)`,
-          boxShadow: "var(--neumorphism-shadow)",
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          zIndex: -1, // Make sure this sits behind all other content
         }}
       >
-        <div className="input-area flex flex-col items-center">
-          <textarea
-            name="userInput"
-            value={userInput}
-            onChange={handleInputChange}
-            className="p-2 border border-black rounded resize-y"
-            placeholder="Write a funny take on everyday life, like 'Why is pizza round, but comes in a square box?'"
-            rows="4"
-            disabled={isLoading}
-          />
-          <button
-            onClick={handleSend}
-            disabled={isLoading}
-            className="bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded mt-4 glow"
-            style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
-          >
-            Send
-          </button>
-          {isLoading && <div className="loading-indicator">Loading...</div>}
-        </div>
-        <div className="w-full mx-auto conversation-container">
-          {conversation &&
-            conversation.map((message, index) => (
-              <div
-                key={index}
-                className={
-                  message.from === "bot"
-                    ? "bot-message-container"
-                    : "user-message-container"
-                }
-              >
-                <span>{message.from === "bot" ? "ComicBot:.." : "...You"}</span>
-                <p
+        <Image
+          src={dallEbg2}
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          alt="dallE background"
+        />
+      </div>
+      <main
+        className="flex flex-col relative" // Add relative here to position children above the background
+        style={{
+          fontFamily: "'Comic Sans MS', sans-serif",
+          fontWeight: "bold",
+          color: "rgb(var(--foreground-rgb))",
+          // Remove background styles that are now handled by the Image component
+        }}
+      >
+        <Navbar />
+        <h1 className="text-5xl text-white text-center mb-10 glow">
+          ComicBot!
+        </h1>
+        <div
+          className="w-full mx-auto m-2 mt-5 bg-deep-red p-8 shadow-md rounded-md relative"
+          style={{
+            backgroundColor: `rgba(var(--deep-red), 0.2)`,
+            boxShadow: "var(--neumorphism-shadow)",
+          }}
+        >
+          <div className="input-area flex flex-col items-center">
+            <textarea
+              name="userInput"
+              value={userInput}
+              onChange={handleInputChange}
+              className="p-2 border border-black rounded resize-y"
+              placeholder="Write a funny take on everyday life, like 'Why is pizza round, but comes in a square box?'"
+              rows="4"
+              disabled={isLoading}
+            />
+            <button
+              onClick={handleSend}
+              disabled={isLoading}
+              className="bg-neon-blue hover:bg-bright-pastel text-white px-5 py-2 rounded mt-4 glow"
+              style={{ backgroundColor: `rgba(var(--neon-blue), 0.8)` }}
+            >
+              Send
+            </button>
+            {isLoading && <div className="loading-indicator">Loading...</div>}
+          </div>
+          <div className="w-full mx-auto conversation-container">
+            {conversation &&
+              conversation.map((message, index) => (
+                <div
+                  key={index}
                   className={
-                    message.from === "bot" ? "bot-message" : "user-message"
+                    message.from === "bot"
+                      ? "bot-message-container"
+                      : "user-message-container"
                   }
                 >
-                  {message.text}
-                </p>
-              </div>
-            ))}
-          {isLoading && (
-            <div className="bot-message-container">
-              <span className="text-white m-2">ComicBot:..</span>
-              <p className="bot-message">{loadingText}</p>
-            </div>
-          )}
-        </div>
-        <button
-          onClick={saveConversation}
-          className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded mt-4"
-          disabled={isSaved}
-        >
-          {isSaved ? "Conversation Saved" : "Save Conversation"}
-        </button>
-
-        <div className="previous-conversations">
-          <h2 className="text-2xl text-white text-center mb-4">
-            Previous Conversations
-          </h2>
-          {allConversations.reverse().map((convo, index) => (
-            <div
-              key={index}
-              className={`${
-                index % 2 === 0 ? "bg-gray-300" : "bg-white"
-              } conversation-container`}
-            >
-              {Array.isArray(convo.messages) &&
-                convo.messages.map((message, i) => (
-                  <div
-                    key={i}
+                  <span>
+                    {message.from === "bot" ? "ComicBot:.." : "...You"}
+                  </span>
+                  <p
                     className={
-                      message.from === "bot"
-                        ? "bot-message-container"
-                        : "user-message-container"
+                      message.from === "bot" ? "bot-message" : "user-message"
                     }
                   >
-                    <span className="text-white m-2">
-                      {message.from === "bot" ? "ComicBot:.." : "...You"}
-                    </span>
-                    <p
+                    {message.text}
+                  </p>
+                </div>
+              ))}
+            {isLoading && (
+              <div className="bot-message-container">
+                <span className="text-white m-2">ComicBot:..</span>
+                <p className="bot-message">{loadingText}</p>
+              </div>
+            )}
+          </div>
+          <button
+            onClick={saveConversation}
+            className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded mt-4"
+            disabled={isSaved}
+          >
+            {isSaved ? "Conversation Saved" : "Save Conversation"}
+          </button>
+
+          <div className="previous-conversations">
+            <h2 className="text-2xl text-white text-center mb-4">
+              Previous Conversations
+            </h2>
+            {allConversations.reverse().map((convo, index) => (
+              <div
+                key={index}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-300" : "bg-white"
+                } conversation-container`}
+              >
+                {Array.isArray(convo.messages) &&
+                  convo.messages.map((message, i) => (
+                    <div
+                      key={i}
                       className={
-                        message.from === "bot" ? "bot-message" : "user-message"
+                        message.from === "bot"
+                          ? "bot-message-container"
+                          : "user-message-container"
                       }
                     >
-                      {message.text}
-                    </p>
-                  </div>
-                ))}
-              <button
-                className="bg-red-500 text-white px-2 py-1 rounded"
-                onClick={() => deleteConversation(convo.id)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+                      <span className="text-white m-2">
+                        {message.from === "bot" ? "ComicBot:.." : "...You"}
+                      </span>
+                      <p
+                        className={
+                          message.from === "bot"
+                            ? "bot-message"
+                            : "user-message"
+                        }
+                      >
+                        {message.text}
+                      </p>
+                    </div>
+                  ))}
+                <button
+                  className="bg-red-500 text-white px-2 py-1 rounded"
+                  onClick={() => deleteConversation(convo.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </>
   );
 };
 
