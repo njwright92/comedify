@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && firebase deploy -- only hosting"
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "aos": "^2.3.4",

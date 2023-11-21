@@ -89,7 +89,7 @@ body {
   border: none;
   border-radius: 0.625em;
   padding: 0.5rem;
-  background-color: rgba(var(--background-rgb), 0.8);
+  background-color: rgba(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
   box-shadow: var(--neumorphism-shadow);
 }
@@ -120,7 +120,7 @@ body {
 
 .bot-message,
 .user-message {
-  background-color: rgba(var(--background-rgb), 0.8);
+  background-color: rgba(var(--background-rgb));
   padding: 0.5em;
   border-radius: 0.25em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
