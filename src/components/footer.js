@@ -1,9 +1,23 @@
 import { useRouter } from "next/router";
-import { signOut, getAuth } from "firebase/auth";
+import { signOut, getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
   const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      unsubscribe();
+    };
+  }, [auth]);
+
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -29,15 +43,17 @@ const Footer = () => {
         >
           Back to Top ↑
         </button>
-        <button
-          onClick={handleSignOut}
-          className="hover:underline glow px-1 py-1 rounded-md text-sm font-small text-white absolute"
-          style={{
-            backgroundColor: `rgba(var(--deep-red), 0.8)`,
-          }}
-        >
-          Sign Out
-        </button>
+        {isAuthenticated && (
+          <button
+            onClick={handleSignOut}
+            className="hover:underline glow px-1 py-1 rounded-md text-sm font-small text-white absolute"
+            style={{
+              backgroundColor: `rgba(var(--deep-red), 0.8)`,
+            }}
+          >
+            Sign Out
+          </button>
+        )}
         <p className="text-sm" style={{ fontWeight: "bold" }}>
           &copy; {new Date().getFullYear()} Comedify. All rights reserved.
         </p>

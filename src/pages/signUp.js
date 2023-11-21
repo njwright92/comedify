@@ -1,4 +1,4 @@
-import { auth, provider, db } from "../../firebase";
+import { auth, provider, db } from "../../firebase.config";
 import { useRouter } from "next/router";
 import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";

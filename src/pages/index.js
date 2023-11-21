@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase.config";
 import Image from "next/image";
 import Head from "next/head";
 import Navbar from "../components/navbar";

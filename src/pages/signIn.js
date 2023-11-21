@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { auth, provider, db } from "../../firebase";
+import { auth, provider, db } from "../../firebase.config";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";

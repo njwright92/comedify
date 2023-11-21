@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { onAuthStateChanged } from "firebase/auth";
-import { db, auth } from "../../firebase";
+import { db, auth } from "../../firebase.config";
 import {
   addDoc,
   collection,
