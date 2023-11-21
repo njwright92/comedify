@@ -141,7 +141,7 @@ const Jokes = () => {
         }}
       >
         <Navbar />
-        <h1 className="text-5xl text-white text-center mb-10 glow">JokePad!</h1>
+        <h1 className="text-5xl glow m-10 mx-auto bg-black p-2.5">JokePad!</h1>
         <div
           className="w-full mx-auto shadow-md rounded-md text-white relative"
           style={{

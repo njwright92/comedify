@@ -181,7 +181,7 @@ const ComicBot = () => {
         }}
       >
         <Navbar />
-        <h1 className="text-5xl text-white text-center mb-10 glow">
+        <h1 className="text-5xl glow m-10 mx-auto bg-black p-2.5">
           ComicBot!
         </h1>
         <div

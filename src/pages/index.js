@@ -128,12 +128,11 @@ export default function Home() {
         </h1>
 
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] m-10 mx-auto"
+          className="relative m-10 mx-auto"
           src={comic}
           alt="Comic Logo"
           width={350}
           height="auto"
-          
           data-aos="flip-up"
         />
         <div className="flex flex-col gap-4 p-1 mt-10">
