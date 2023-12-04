@@ -121,7 +121,7 @@ export default function Home() {
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div
           className="comicBotCard glow text-white m-1 flex flex-col"
-          data-aos="fade-left"
+          data-aos="fade-up"
         >
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
@@ -158,7 +158,7 @@ export default function Home() {
         </div>
         <div
           className="jokeLibraryCard glow text-white m-1 flex flex-col"
-          data-aos="fade-right"
+          data-aos="fade-up"
         >
           <button
             onClick={() => handleNavigation("/jokes", true)}

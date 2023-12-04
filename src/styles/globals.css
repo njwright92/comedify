@@ -88,7 +88,7 @@ body {
   margin-bottom: 2rem;
   border: none;
   border-radius: 0.625em;
-  padding: 0.5rem;
+  padding: 0.25rem;
   background-color: rgba(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
   box-shadow: var(--neumorphism-shadow);
@@ -121,7 +121,20 @@ body {
 .bot-message,
 .user-message {
   background-color: rgba(var(--background-rgb));
-  padding: 0.5em;
+  padding: 0.15rem;
   border-radius: 0.25em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

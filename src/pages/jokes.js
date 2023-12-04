@@ -49,7 +49,7 @@ const Jokes = () => {
           id: doc.id,
           joke: doc.data().joke,
         }));
-        setJokes(fetchedJokes.reverse());
+        setJokes(fetchedJokes);
       });
       return () => unsubscribe();
     };

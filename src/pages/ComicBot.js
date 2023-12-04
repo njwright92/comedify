@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "../components/navbar";
 import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../../firebase.config";
@@ -21,9 +21,8 @@ const ComicBot = () => {
     auth.currentUser ? auth.currentUser.uid : null
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingText, setLoadingText] = useState("Loading");
 
-  const askComicbot = async (prompt) => {
+  const askComicbot = useCallback(async (prompt) => {
     try {
       const response = await fetch(
         "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-alpha",
@@ -43,8 +42,9 @@ const ComicBot = () => {
       return data;
     } catch (error) {
       console.error("Error making request:", error);
+      alert("Error please try again");
     }
-  };
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -72,7 +72,7 @@ const ComicBot = () => {
         messages: doc.data().messages,
       }));
 
-      setAllConversations(fetchedConvos.reverse());
+      setAllConversations(fetchedConvos);
     };
 
     if (userUID) {
@@ -80,7 +80,7 @@ const ComicBot = () => {
     }
   }, [userUID]);
 
-  const saveConversation = async () => {
+  const saveConversation = useCallback(async () => {
     try {
       const userUID = auth.currentUser?.uid;
       if (userUID) {
@@ -101,7 +101,7 @@ const ComicBot = () => {
     } catch (error) {
       console.error("Error saving conversation: ", error);
     }
-  };
+  }, [conversation]);
 
   const deleteConversation = async (docID) => {
     try {
@@ -115,22 +115,16 @@ const ComicBot = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     setUserInput(e.target.value);
-  };
+  }, []);
 
-  const handleSend = async () => {
+  const handleSend = useCallback(async () => {
     setIsLoading(true);
     setIsSaved(false);
     setConversation([...conversation, { from: "user", text: userInput }]);
     setUserInput("");
 
-    const loadingInterval = setInterval(() => {
-      setLoadingText((prev) => prev + ".");
-      if (loadingText.length > "Loading...".length) {
-        setLoadingText("Loading");
-      }
-    }, 500);
     try {
       const botResponses = await askComicbot(userInput);
       if (botResponses && botResponses.length > 0) {
@@ -144,11 +138,11 @@ const ComicBot = () => {
       }
     } catch (error) {
       console.error("Error in handleSend:", error);
+      alert("Error please try again");
     } finally {
-      clearInterval(loadingInterval);
       setIsLoading(false);
     }
-  };
+  }, [userInput, conversation]);
 
   return (
     <main
@@ -163,7 +157,7 @@ const ComicBot = () => {
       <Navbar />
       <h1 className="text-5xl glow m-10 mx-auto bg-black p-2.5">ComicBot!</h1>
       <div
-        className="w-full mx-auto m-2 mt-5 bg-deep-red p-8 shadow-md rounded-md relative"
+        className="w-full mx-auto m-2 mt-5 bg-deep-red p-2 shadow-md rounded-md relative"
         style={{
           backgroundColor: `rgba(var(--deep-red), 0.2)`,
           boxShadow: "var(--neumorphism-shadow)",
@@ -187,11 +181,27 @@ const ComicBot = () => {
           >
             Send
           </button>
-          {isLoading && <div className="loading-indicator">Loading...</div>}
         </div>
         <div className="w-full mx-auto conversation-container">
+          {isLoading && (
+            <div className="bot-message-container">
+              <span className="text-white m-2">loading...</span>
+              <div className="flex justify-center items-center">
+                <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeDasharray="1, 21"
+                    d="M12 2v20M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          )}
           {conversation &&
-            conversation.map((message, index) => (
+            [...conversation].reverse().map((message, index) => (
               <div
                 key={index}
                 className={
@@ -210,13 +220,8 @@ const ComicBot = () => {
                 </p>
               </div>
             ))}
-          {isLoading && (
-            <div className="bot-message-container">
-              <span className="text-white m-2">ComicBot:..</span>
-              <p className="bot-message">{loadingText}</p>
-            </div>
-          )}
         </div>
+
         <button
           onClick={saveConversation}
           className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded mt-4"
