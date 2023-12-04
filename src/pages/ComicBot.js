@@ -142,7 +142,7 @@ const ComicBot = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [userInput, conversation]);
+  }, [userInput, conversation, askComicbot]);
 
   return (
     <main

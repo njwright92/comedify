@@ -117,6 +117,7 @@ export default function Home() {
         width={350}
         height="auto"
         data-aos="flip-up"
+        priority
       />
       <div className="flex flex-col gap-4 p-1 mt-10">
         <div
