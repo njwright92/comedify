@@ -234,7 +234,7 @@ const ComicBot = () => {
           <h2 className="text-2xl text-white text-center mb-4">
             Previous Conversations
           </h2>
-          {allConversations.reverse().map((convo, index) => (
+          {[...allConversations].reverse().map((convo, index) => (
             <div
               key={index}
               className={`${
