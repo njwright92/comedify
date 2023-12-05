@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve@latest out",
     "lint": "next lint",
-    "deploy": "firebase deploy --only hosting"
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "aos": "^2.3.4",

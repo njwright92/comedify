@@ -84,7 +84,7 @@ export default function Home() {
               className="glow px-6 py-3 rounded-md text-lg font-medium mr-4"
               style={{
                 backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-                color: "white",
+                color: "black",
               }}
             >
               Sign In
@@ -94,7 +94,7 @@ export default function Home() {
               className="glow px-6 py-3 rounded-md text-lg font-medium"
               style={{
                 backgroundColor: `rgba(var(--neon-blue), 0.8)`,
-                color: "white",
+                color: "black",
               }}
             >
               Sign Up
@@ -115,7 +115,8 @@ export default function Home() {
         src={comic}
         alt="Comic Logo"
         width={350}
-        height="auto"
+        height={350} // Set a specific height
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         data-aos="flip-up"
         priority
       />
@@ -126,7 +127,7 @@ export default function Home() {
         >
           <button
             onClick={() => handleNavigation("/ComicBot", true)}
-            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-200 text-black transition duration-200 hover:bg-gray-300 hover:text-light-gray"
           >
             ComicBot
           </button>
@@ -150,8 +151,9 @@ export default function Home() {
                   className="self-end mb-1"
                   src={comicBot}
                   alt="comicbot"
-                  width="auto"
-                  height="350"
+                  width={350}
+                  height={350}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </button>
             </div>
@@ -163,7 +165,7 @@ export default function Home() {
         >
           <button
             onClick={() => handleNavigation("/jokes", true)}
-            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-700 text-white transition duration-200 hover:bg-gray-600 hover:text-light-gray"
+            className="text-4xl mb-3 p-1 glow rounded-md text-lg font-medium bg-gray-200 text-black transition duration-200 hover:bg-gray-300 hover:text-light-gray"
           >
             JokePad
           </button>
@@ -178,8 +180,9 @@ export default function Home() {
                   className="self-end mb-1"
                   src={jokes}
                   alt="Jokes"
-                  width="350"
-                  height="auto"
+                  width={350}
+                  height={350}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </button>
             </div>

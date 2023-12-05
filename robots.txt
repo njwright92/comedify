@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://comedify-54274.web.app/sitemap.xml
