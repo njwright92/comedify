@@ -7,7 +7,7 @@ export default function Document() {
       <Head>
         <meta
           name="description"
-          content="Comedify - A comedian's assistant with comicBot and JokePad"
+          content="Comedify - A comedian's assistant with an llm comicBot and JokePad"
         />
       </Head>
       <body>

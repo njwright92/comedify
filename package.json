@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "npx serve@latest out",
     "lint": "next lint",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "aos": "^2.3.4",
