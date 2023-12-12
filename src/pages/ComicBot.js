@@ -25,7 +25,7 @@ const ComicBot = () => {
   const askComicbot = useCallback(async (prompt) => {
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-alpha",
+        "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
         {
           method: "POST",
           headers: {
