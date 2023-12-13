@@ -3,6 +3,7 @@
 const nextConfig = {
   images: {
     unoptimized: true,
+    minimumCacheTTL: 60,
   },
   output: "export",
 };
